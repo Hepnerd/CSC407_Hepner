@@ -16,9 +16,22 @@ class MovieController extends Controller
     public function index() {
         //
 
-        $movie = Movie::get()->toArray();
+        $Movie = Movie::get()->toArray();
 
-        return view('movieIndex')->with('movie', $movie);
+        return view('MovieIndex')->with('Movie', $Movie);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function manage() {
+        //
+
+        $Movie = Movie::get()->toArray();
+
+        return view('MovieManage')->with('Movie', $Movie);
     }
 
     /**
@@ -29,7 +42,7 @@ class MovieController extends Controller
     public function create()
     {
         //
-        return view('movieCreate');
+        return view('MovieCreate');
     }
 
     /**
@@ -41,6 +54,13 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         //
+        $input=$request->all();
+
+        $Movie = new Movie($input);
+        $Movie->save();
+
+        return redirect()->route('Movie.index');
+
     }
 
     /**
@@ -52,6 +72,9 @@ class MovieController extends Controller
     public function show(Movie $Movie)
     {
         //
+        $Movie = Movie::get()->where('id', $Movie->id)->toArray();
+        //dd($Movie[0]);
+        return view('MovieUpdate')->with('Movie', $Movie[0]);
 
     }
 
@@ -64,6 +87,9 @@ class MovieController extends Controller
     public function edit(Movie $Movie)
     {
         //
+        $Movie = Movie::get()->where('id', $Movie->id)->toArray();
+        //dd($Movie[0]);
+        return view('MovieUpdate')->with('Movie', $Movie[0]);
     }
 
     /**
@@ -76,6 +102,18 @@ class MovieController extends Controller
     public function update(Request $request, Movie $Movie)
     {
         //
+        $Movie = Movie::findorFail($request['id']);
+
+        $Movie->title = $request['title'];
+        $Movie->length = $request['length'];
+        $Movie->description = $request['description'];
+        $Movie->onDVD = $request['onDVD'];
+        $Movie->onBlueRay = $request['onBlueRay'];
+        $Movie->coverPhoto = $request['coverPhoto'];
+
+        $Movie->save();
+
+        return redirect()->route('movie.index');
     }
 
     /**
@@ -87,5 +125,11 @@ class MovieController extends Controller
     public function destroy(Movie $Movie)
     {
         //
+        $selectedDelete = Movie::findOrFail($Movie['id']);
+        dd($selectedDelete);
+        if($selectedDelete->delete()){
+
+            return redirect()->route('movie.index');
+        }
     }
 }

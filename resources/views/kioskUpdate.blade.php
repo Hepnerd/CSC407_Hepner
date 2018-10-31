@@ -2,28 +2,27 @@
 
 @section('content')
 
-<div class="container">
-
-        <form method="POST" action="{{route('kiosk.store')}}">
+    <div class="container">
+        <form method="PUT" action="{{ route('kiosk.update', $kiosk['id']) }}">
             @csrf
             <fieldset>
                 <!-- Form Name -->
-                <legend style="text-align: center; text-decoration: underline; padding-bottom: 25px">Add A New Kiosk </legend>
+                <legend style="text-align: center; text-decoration: underline; padding-bottom: 25px">Edit the Selected Kiosk</legend>
 
                 <!-- Text input-->
-                <div class="form-group row">
-                    <label class="col-md-4 control-label" for="location" style="text-align: right">Kiosk Location</label>
+                <div class="form-group row text-right">
+                    <label class="col-md-4 control-label" for="location">Kiosk Location</label>
                     <div class="col-md-4">
-                        <input id="location" name="location" type="text" placeholder="beside the Denny's" class="form-control input-md" value="{{old('location')}}" required="">
+                        <input id="location" name="location" type="text" placeholder="beside the Denny's" class="form-control input-md" value="{{ $kiosk['location'] }}" required="">
 
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group row  text-right">
-                    <label class="col-md-4 control-label" for="address" style="text-align: right">Kiosk Address</label>
+                    <label class="col-md-4 control-label" for="address">Kiosk Address</label>
                     <div class="col-md-4">
-                        <input id="address" name="address" type="text" placeholder="23151 Oak Lane " class="form-control input-md" value="{{old('address')}}" required="">
+                        <input id="address" name="address" type="text" placeholder="23151 Oak Lane " class="form-control input-md" value="{{ $kiosk['address'] }}" required="">
 
                     </div>
                 </div>
@@ -36,8 +35,8 @@
                         <a href="{{route('kiosk.index')}}" id="kioskCancelButton" name="kioskCancelButton" class="btn btn-danger">Cancel</a>
                     </div>
                 </div>
-           </fieldset>
+            </fieldset>
         </form>
+    </div>
 
-</div>
 @endsection

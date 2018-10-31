@@ -41,6 +41,13 @@ class KioskController extends Controller
     public function store(Request $request)
     {
         //
+
+        $input=$request->all();
+
+        $kiosk = new Kiosk($input);
+        $kiosk->save();
+
+        return redirect()->route('kiosk.index');
     }
 
     /**
@@ -52,6 +59,9 @@ class KioskController extends Controller
     public function show(Kiosk $kiosk)
     {
         //
+        $kiosk = Kiosk::get()->where('id', $kiosk->id)->toArray();
+
+        return $kiosk;
     }
 
     /**
@@ -63,6 +73,9 @@ class KioskController extends Controller
     public function edit(Kiosk $kiosk)
     {
         //
+        $kiosk = Kiosk::get()->where('id', $kiosk->id)->toArray();
+        //dd($kiosk[0]);
+        return view('kioskUpdate')->with('kiosk', $kiosk[0]);
     }
 
     /**
@@ -75,6 +88,14 @@ class KioskController extends Controller
     public function update(Request $request, Kiosk $kiosk)
     {
         //
+        $kiosk = Kiosk::findorFail($request['id']);
+
+        $kiosk->location = $request['location'];
+        $kiosk->address = $request['address'];
+
+        $kiosk->save();
+
+        return redirect()->route('kiosk.index');
     }
 
     /**
