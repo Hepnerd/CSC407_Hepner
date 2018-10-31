@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @extends('layouts.app')
-
-@section('content')
     <div class="container">
 
         @foreach($movie as $movies)
@@ -21,5 +18,4 @@
             </div>
         @endforeach
     </div>
-@endsection
 @endsection
