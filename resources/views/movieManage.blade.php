@@ -21,6 +21,7 @@
             <td><a href="{{route('movie.edit', $Movies['id'])}}" id="MovieEditButton" name="MovieEditButton" class="btn btn-primary">Edit</a></td>
             <td>
                 <form method="POST" action="{{route('movie.destroy', $Movies['id'])}}">
+                    @method('DELETE')
                     @csrf
                     <fieldset>
                         <!-- Button -->

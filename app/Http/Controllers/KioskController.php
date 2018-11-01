@@ -73,9 +73,9 @@ class KioskController extends Controller
     public function edit(Kiosk $kiosk)
     {
         //
-        $kiosk = Kiosk::get()->where('id', $kiosk->id)->toArray();
-        //dd($kiosk[0]);
-        return view('kioskUpdate')->with('kiosk', $kiosk[0]);
+
+        //dd($kiosk);
+        return view('kioskUpdate')->with('kiosk', $kiosk);
     }
 
     /**
@@ -107,5 +107,10 @@ class KioskController extends Controller
     public function destroy(Kiosk $kiosk)
     {
         //
+        $selectedDelete = Kiosk::findOrFail($kiosk['id']);
+        if($selectedDelete->delete()){
+
+            return redirect()->route('kiosk.index');
+        }
     }
 }

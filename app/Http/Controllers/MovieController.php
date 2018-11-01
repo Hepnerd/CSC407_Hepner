@@ -18,7 +18,7 @@ class MovieController extends Controller
 
         $Movie = Movie::get()->toArray();
 
-        return view('MovieIndex')->with('Movie', $Movie);
+        return view('MovieIndex')->with('movie', $Movie);
     }
 
     /**
@@ -124,9 +124,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $Movie)
     {
-        //
         $selectedDelete = Movie::findOrFail($Movie['id']);
-        dd($selectedDelete);
         if($selectedDelete->delete()){
 
             return redirect()->route('movie.index');

@@ -18,8 +18,22 @@
             <tr>
                 <td>{{ $kiosks['location'] }}</td>
                 <td style="text-align:center;">{{ $kiosks['address'] }}</td>
-                <td><a href="{{route('kiosk.edit', $kiosks['id'])}}" id="kioskEditButton" name="kioskEditButton" class="btn btn-primary">Edit</a>
-                    <a href="{{route('movie.index')}}" id="kioskDeleteButton" name="kioskDeleteButton" class="btn btn-danger">Delete</a></td>
+                <td><a href="{{route('kiosk.edit', $kiosks['id'])}}" id="kioskEditButton" name="kioskEditButton" class="btn btn-primary">Edit</a></td>
+                <td>
+                    <form method="POST" action="{{route('kiosk.destroy', $kiosks['id'])}}">
+                        @method('DELETE')
+                        @csrf
+                        <fieldset>
+                            <!-- Button -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="deleteButton"></label>
+                                <div class="col-md-4">
+                                    <button id="submitDeleteButton" name="submitDeleteButton" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </td>
             </tr>
 
         @endforeach
