@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MovieValidation;
 use App\Movie;
 use Illuminate\Http\Request;
 
@@ -48,10 +49,10 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MovieValidation  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MovieValidation $request)
     {
         //
         $input=$request->all();
@@ -71,8 +72,6 @@ class MovieController extends Controller
      */
     public function show(Movie $Movie)
     {
-        //
-        $Movie = Movie::get()->where('id', $Movie->id)->toArray();
         //dd($Movie[0]);
         return view('MovieUpdate')->with('Movie', $Movie[0]);
 
@@ -86,29 +85,34 @@ class MovieController extends Controller
      */
     public function edit(Movie $Movie)
     {
-        //
-        $Movie = Movie::get()->where('id', $Movie->id)->toArray();
         //dd($Movie[0]);
-        return view('MovieUpdate')->with('Movie', $Movie[0]);
+        return view('MovieUpdate')->with('Movie', $Movie);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MovieValidation $request
      * @param  \App\Movie  $Movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $Movie)
+    public function update(MovieValidation $request, Movie $Movie)
     {
         //
-        $Movie = Movie::findorFail($request['id']);
+        //$Movie = Movie::findorFail($request['id']);
 
         $Movie->title = $request['title'];
         $Movie->length = $request['length'];
         $Movie->description = $request['description'];
-        $Movie->onDVD = $request['onDVD'];
-        $Movie->onBlueRay = $request['onBlueRay'];
+
+        if(array_key_exists('onBlueRay', $request)){
+            $Movie->onBlueRay = $request['onBlueRay'];
+        }
+
+        if(array_key_exists('onDVD', $request)){
+            $Movie->onDVD = $request['onDVD'];
+        }
+
         $Movie->coverPhoto = $request['coverPhoto'];
 
         $Movie->save();

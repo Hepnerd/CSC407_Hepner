@@ -11,10 +11,14 @@
 
         <!-- Text input-->
         <div class="form-group row">
-            <label class="col-md-6 control-label" for="title">Movie Title</label>
-            <div class="col-md-6">
-                <input id="title" name="title" type="text" placeholder="" class="form-control input-md" required="">
-
+            <label class="col-md-4 control-label" for="title">Movie Title</label>
+            <div class="col-md-4">
+                <input id="title" name="title" type="text" placeholder="" class="form-control input-md">
+                @if($errors->has('title'))
+                    <div>
+                        <small id="passwordHelp" class="text-danger">{{ $errors->first('title') }}</small>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -22,8 +26,12 @@
         <div class="form-group row">
             <label class="col-md-4 control-label" for="length">Movie Length</label>
             <div class="col-md-4">
-                <input id="length" name="length" type="text" placeholder="" class="form-control input-md" required="">
-                <span class="help-block">help</span>
+                <input id="length" name="length" type="text" placeholder="" class="form-control input-md" >
+                @if($errors->has('length'))
+                    <div>
+                        <small id="passwordHelp" class="text-danger">{{ $errors->first('length') }}</small>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -31,8 +39,12 @@
         <div class="form-group row">
             <label class="col-md-4 control-label" for="description">Movie Description</label>
             <div class="col-md-6">
-                <input id="description" name="description" type="text" placeholder="" class="form-control input-md" required="">
-
+                <input id="description" name="description" type="text" placeholder="" class="form-control input-md" >
+                @if($errors->has('description'))
+                    <div>
+                        <small id="passwordHelp" class="text-danger">{{ $errors->first('description') }}</small>
+                    </div>
+                @endif
             </div>
         </div>
 

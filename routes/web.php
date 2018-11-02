@@ -35,14 +35,16 @@ Route::get('kiosk/{id}/update', 'KioskController@update')->name('kiosk.update');
 
 
 
-Route::resource('/movie', 'MovieController');
+
 
 Route::get('/movie/manage', 'MovieController@manage')->name('movie.manage');
 
-Route::get('movie/{id}', 'MovieController@show')-> name('movie.show');
+Route::resource('/movie', 'MovieController');
 
-Route::get('movie/{id}/edit', 'MovieController@edit')-> name('movie.edit');
+//Route::get('movie/{id}', 'MovieController@show')-> name('movie.show');
 
-Route::get('movie/{id}/update', 'MovieController@update')->name('movie.update');
+//Route::get('movie/{id}/edit', 'MovieController@edit')-> name('movie.edit');
+
+//Route::get('movie/{id}/update', 'MovieController@update')->name('movie.update');
 
 

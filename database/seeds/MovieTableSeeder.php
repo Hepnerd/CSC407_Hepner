@@ -15,7 +15,6 @@ class MovieTableSeeder extends Seeder
 
         Movie::create(array(
             'title' => 'Avatar',
-            'rating' => '4 out of 5',
             'length' => '121',
             'onDVD' => '1',
             'onBlueRay' => '0',
@@ -24,7 +23,6 @@ class MovieTableSeeder extends Seeder
 
         Movie::create(array(
             'title' => 'Great Gatsby',
-            'rating' => '4.5 out of 5',
             'length' => '123',
             'onDVD' => '1',
             'onBlueRay' => '0',

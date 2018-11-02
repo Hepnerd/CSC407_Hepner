@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KioskValidation;
 use App\Kiosk;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -35,10 +36,10 @@ class KioskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  KioskValidation  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KioskValidation $request)
     {
         //
 
@@ -74,18 +75,17 @@ class KioskController extends Controller
     {
         //
 
-        //dd($kiosk);
         return view('kioskUpdate')->with('kiosk', $kiosk);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  KioskValidation  $request
      * @param  \App\Kiosk  $kiosk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kiosk $kiosk)
+    public function update(KioskValidation $request, Kiosk $kiosk)
     {
         //
         $kiosk = Kiosk::findorFail($request['id']);
@@ -108,6 +108,9 @@ class KioskController extends Controller
     {
         //
         $selectedDelete = Kiosk::findOrFail($kiosk['id']);
+
+
+
         if($selectedDelete->delete()){
 
             return redirect()->route('kiosk.index');

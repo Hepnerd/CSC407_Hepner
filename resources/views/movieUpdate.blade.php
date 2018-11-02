@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <form method="PUT" action="{{ route('movie.update', $Movie['id']) }}">
+    <form method="POST" action="{{ route('movie.update', $Movie['id']) }}">
+        @method('PUT')
         <fieldset>
             @csrf
             <div class="container col-xs-12">
@@ -23,7 +24,7 @@
                     <label class="col-md-4 control-label" for="length" style="text-align: right">Movie Length</label>
                     <div class="col-md-4">
                         <input id="length" name="length" type="text" placeholder="" class="form-control input-md" value="{{ $Movie['length'] }}"required="">
-                        <span class="help-block">help</span>
+
                     </div>
                 </div>
 
@@ -42,14 +43,24 @@
                     <div class="col-md-4">
                         <div class="checkbox">
                             <label for="onDVD">
-                                <input type="checkbox" name="onDVD" id="onDVD" value="{{ $Movie['onDVD'] }}">
-                                DVD
+                                @if($Movie['onDVD'] == '1')
+                                <input type="checkbox" checked name="onDVD" id="onDVD" value="{{ $Movie['onDVD'] }}">
+                                    DVD
+                                    @else
+                                    <input type="checkbox" name="onDVD" id="onDVD" value="{{ $Movie['onDVD'] }}">
+                                    DVD
+                                    @endif
                             </label>
                         </div>
                         <div class="checkbox">
                             <label for="onBlueRay">
-                                <input type="checkbox" name="onBlueRay" id="onBlueRay" value="{{ $Movie['onBlueRay'] }}">
+                                @if($Movie['onBlueRay'] == '1')
+                                <input type="checkbox" checked name="onBlueRay" id="onBlueRay" value="{{ $Movie['onBlueRay'] }}">
                                 BlueRay
+                                    @else
+                                    <input type="checkbox" name="onBlueRay" id="onBlueRay" value="{{ $Movie['onBlueRay'] }}">
+                                    BlueRay
+                                    @endif
                             </label>
                         </div>
                     </div>
