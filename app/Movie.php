@@ -11,6 +11,13 @@ class Movie extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title', 'length','description','onDVD','onBlueRay','coverPhoto',
-        ];
+        'title', 'length','description','genreID','onDVD','onBlueRay','coverPhoto',
+    ];
+
+    public function kiosks()
+    {
+        return $this->belongsToMany('App\Kiosk', 'disks')
+            ->withPivot('comment')
+            ->withTimestamp();
+    }
 }

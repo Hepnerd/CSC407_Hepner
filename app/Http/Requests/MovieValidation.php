@@ -28,6 +28,7 @@ class MovieValidation extends FormRequest
             'title' => ['required', 'max:64'],
             'length' => ['required', 'max:11'],
             'description' => ['required', 'max:1024'],
+            'genreID' => ['required', 'gte:1'],
         ];
     }
 
@@ -42,6 +43,8 @@ class MovieValidation extends FormRequest
             'title.required' => 'Please provide a movie title',
             'length.required' => 'The movies length is needed please.',
             'description.required' => 'The people want to hear what its about...give them a description.',
+            'genreID.required' => 'Please select a genre from the drop down list.',
+            'genreID.gte' => 'Please select a valid genre from the drop down list.'
         ];
     }
 }

@@ -8,8 +8,11 @@
         <thead>
         <tr>
             <th style="text-align:center;">Movie's Title</th>
-            <th style="text-align:center;">Description</th>
-            <th style="text-align:center;">Button Bar</th>
+            <th style="text-align:center;padding-right: 45px; padding-left: 45px;">Description</th>
+            <th style="text-align:center; padding-right: 45px;">Genre ID</th>
+            <th style="text-align:center;"></th>
+            <th style="text-align:center;"></th>
+            <th style="text-align:center;"></th>
         </tr>
         </thead>
         <tbody>
@@ -17,8 +20,17 @@
 
         <tr>
             <td>{{ $Movies['title'] }}</td>
-            <td style="text-align:center;">{{ $Movies['description'] }}</td>
+            <td style="text-align:center; padding-right: 45px; padding-left: 45px;">{{ $Movies['description'] }}</td>
+
+            @foreach($Genres as $Genre)
+                @if($Genre['id'] == $Movies['genreID'])
+                    <td style="text-align: center; padding-right: 45px;">{{ $Genre['name'] }}</td>
+                @endif
+            @endforeach
+
+            <td><a href="{{route('movie.create')}}" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Add</a></td>
             <td><a href="{{route('movie.edit', $Movies['id'])}}" id="MovieEditButton" name="MovieEditButton" class="btn btn-primary">Edit</a></td>
+
             <td>
                 <form method="POST" action="{{route('movie.destroy', $Movies['id'])}}">
                     @method('DELETE')

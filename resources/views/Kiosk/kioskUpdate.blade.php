@@ -3,7 +3,8 @@
 @section('content')
 
     <div class="container">
-        <form method="PUT" action="{{ route('kiosk.update', $kiosk['id']) }}">
+        <form method="POST" action="{{ route('kiosk.update', $kiosk['id']) }}">
+            @method('PUT')
             @csrf
             <fieldset>
                 <!-- Form Name -->
@@ -13,7 +14,7 @@
                 <div class="form-group row text-right">
                     <label class="col-md-4 control-label" for="location">Kiosk Location</label>
                     <div class="col-md-4">
-                        <input id="location" name="location" type="text" placeholder="beside the Denny's" class="form-control input-md" value="{{ $kiosk['location'] }}">
+                        <input id="location" name="location" type="text" placeholder="beside the Denny's" class="form-control input-md" value="{{ old('location', $kiosk['location']) }}">
                         @if($errors->has('location'))
                             <div>
                                 <small id="passwordHelp" class="text-danger">{{ $errors->first('location') }}</small>
@@ -26,7 +27,7 @@
                 <div class="form-group row  text-right">
                     <label class="col-md-4 control-label" for="address">Kiosk Address</label>
                     <div class="col-md-4">
-                        <input id="address" name="address" type="text" placeholder="23151 Oak Lane " class="form-control input-md" value="{{ $kiosk['address'] }}">
+                        <input id="address" name="address" type="text" placeholder="23151 Oak Lane " class="form-control input-md" value="{{ old('address', $kiosk['address']) }}">
                         @if($errors->has('address'))
                             <div>
                                 <small id="passwordHelp" class="text-danger">{{ $errors->first('address') }}</small>

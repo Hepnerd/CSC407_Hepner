@@ -6,7 +6,7 @@
         @foreach($movie as $movies)
         <div class="flex-item">
 
-                    <img class="movieCover" style="padding-bottom: 20px;" src={{ $movies['coverPhoto'] }}>
+                    <img class="movieCover" style="padding-bottom: 20px;" src="/images/movie_{{$movies['id']}}.jpg">
 
 
 

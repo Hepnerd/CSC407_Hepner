@@ -14,4 +14,11 @@ class Kiosk extends Model
     protected $fillable = [
       'location', 'address',
     ];
+
+    public function movies()
+    {
+        return $this->belongsToMany('App\Movie', 'disks')
+            ->withPivot('comment')
+            ->withTimestamp();
+    }
 }

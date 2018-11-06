@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Genre;
 use App\Http\Requests\MovieValidation;
 use App\Movie;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -14,12 +17,13 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         //
 
         $Movie = Movie::get()->toArray();
 
-        return view('MovieIndex')->with('movie', $Movie);
+        return view('Movie/MovieIndex')->with('movie', $Movie);
     }
 
     /**
@@ -27,12 +31,13 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function manage() {
+    public function manage()
+    {
         //
-
+        $Genres = Genre::get()->toArray();
         $Movie = Movie::get()->toArray();
 
-        return view('MovieManage')->with('Movie', $Movie);
+        return view('Movie/MovieManage')->with('Movie', $Movie)->with('Genres', $Genres);
     }
 
     /**
@@ -43,31 +48,36 @@ class MovieController extends Controller
     public function create()
     {
         //
-        return view('MovieCreate');
+        return view('Movie/MovieCreate');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  MovieValidation  $request
+     * @param  MovieValidation $request
      * @return \Illuminate\Http\Response
      */
     public function store(MovieValidation $request)
     {
         //
-        $input=$request->all();
+        $input = $request->all();
 
         $Movie = new Movie($input);
+
         $Movie->save();
 
-        return redirect()->route('Movie.index');
+        if ($request->file('coverPhoto')) {
+            $this->savePicture($request, $Movie);
+        }
+
+        return redirect()->route('movie.manage');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Movie  $Movie
+     * @param  \App\Movie $Movie
      * @return \Illuminate\Http\Response
      */
     public function show(Movie $Movie)
@@ -80,36 +90,37 @@ class MovieController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Movie  $Movie
+     * @param  \App\Movie $Movie
      * @return \Illuminate\Http\Response
      */
     public function edit(Movie $Movie)
     {
-        //dd($Movie[0]);
-        return view('MovieUpdate')->with('Movie', $Movie);
+        $genres = Genre::get()->toArray();
+
+        return view('Movie/MovieUpdate')->with('Movie', $Movie)->with('Genres', $genres);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  MovieValidation $request
-     * @param  \App\Movie  $Movie
+     * @param  \App\Movie $Movie
      * @return \Illuminate\Http\Response
      */
     public function update(MovieValidation $request, Movie $Movie)
     {
         //
-        //$Movie = Movie::findorFail($request['id']);
 
         $Movie->title = $request['title'];
         $Movie->length = $request['length'];
         $Movie->description = $request['description'];
+        $Movie->genreID = $request['genreID'];
 
-        if(array_key_exists('onBlueRay', $request)){
+        if (array_key_exists('onBlueRay', $request)) {
             $Movie->onBlueRay = $request['onBlueRay'];
         }
 
-        if(array_key_exists('onDVD', $request)){
+        if (array_key_exists('onDVD', $request)) {
             $Movie->onDVD = $request['onDVD'];
         }
 
@@ -117,21 +128,39 @@ class MovieController extends Controller
 
         $Movie->save();
 
-        return redirect()->route('movie.index');
+        return redirect()->route('movie.manage');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Movie  $Movie
+     * @param  \App\Movie $Movie
      * @return \Illuminate\Http\Response
      */
     public function destroy(Movie $Movie)
     {
         $selectedDelete = Movie::findOrFail($Movie['id']);
-        if($selectedDelete->delete()){
+        if ($selectedDelete->delete()) {
 
-            return redirect()->route('movie.index');
+            return redirect()->route('movie.manage');
         }
+    }
+
+
+    private function savePicture(Request $request, Movie $movie)
+    {
+        $original = $request->file('coverPhoto');
+
+        $image = Image::make($original)->resize(150, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('jpg', 75);
+
+        $filename = 'movie_' . $movie->id . 'jpg';
+
+        if (Storage::disk('web')->exists($filename)) {
+            Storage::disk('web')->delete($filename);
+        }
+
+        Storage::disk('web')->put($filename, $image->getEncoded());
     }
 }

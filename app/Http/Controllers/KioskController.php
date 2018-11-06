@@ -19,7 +19,7 @@ class KioskController extends Controller
         //
         $kiosk = Kiosk::get()->toArray();
 
-        return view('kioskIndex')->with('kiosk', $kiosk);
+        return view('Kiosk/kioskIndex')->with('kiosk', $kiosk);
     }
 
     /**
@@ -30,7 +30,7 @@ class KioskController extends Controller
     public function create()
     {
         //
-        return view('kioskCreate');
+        return view('Kiosk/kioskCreate');
     }
 
     /**
@@ -75,7 +75,7 @@ class KioskController extends Controller
     {
         //
 
-        return view('kioskUpdate')->with('kiosk', $kiosk);
+        return view('Kiosk/kioskUpdate')->with('kiosk', $kiosk);
     }
 
     /**

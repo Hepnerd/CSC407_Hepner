@@ -22,29 +22,27 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
-
+/**
+ * Routes for kiosks
+ */
 Route::resource('/kiosk', 'KioskController');
 
-//Route::get('kiosk/{id}', 'KioskController@show')-> name('kiosk.show');
-
-Route::get('kiosk/{id}/edit', 'KioskController@edit')-> name('kiosk.edit');
-
-Route::get('kiosk/{id}/update', 'KioskController@update')->name('kiosk.update');
-
-
-
-
-
-
+/**
+ * Routes for movies
+ */
 Route::get('/movie/manage', 'MovieController@manage')->name('movie.manage');
 
 Route::resource('/movie', 'MovieController');
 
-//Route::get('movie/{id}', 'MovieController@show')-> name('movie.show');
 
-//Route::get('movie/{id}/edit', 'MovieController@edit')-> name('movie.edit');
+/**
+ * Routes for customer
+ */
+Route::resource('/customer', 'CustomerController');
 
-//Route::get('movie/{id}/update', 'MovieController@update')->name('movie.update');
+/**
+ * Routes for disks
+ */
+Route::resource('/disk', 'DiskController');
 
 
