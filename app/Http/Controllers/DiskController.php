@@ -17,6 +17,13 @@ class DiskController extends Controller
     public function index()
     {
         //
+
+        $disks = Movie::has('disk')
+            ->with('disk')
+            ->get()
+            ->toArray();
+
+        return view('disk.index')->with('disks', $disks);
     }
 
     /**
@@ -42,6 +49,11 @@ class DiskController extends Controller
     public function store(Request $request)
     {
         //
+        $movie_ID = $request->movie_ID;
+        $kiosk_ID = $request->kiosk_ID;
+
+        $disk = Movie::find();
+
     }
 
     /**

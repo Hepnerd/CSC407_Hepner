@@ -151,11 +151,11 @@ class MovieController extends Controller
     {
         $original = $request->file('coverPhoto');
 
-        $image = Image::make($original)->resize(150, null, function ($constraint) {
+        $image = Image::make($original)->resize(250, null, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg', 75);
 
-        $filename = 'movie_' . $movie->id . 'jpg';
+        $filename = 'movie_' . $movie->id . '.jpg';
 
         if (Storage::disk('web')->exists($filename)) {
             Storage::disk('web')->delete($filename);
