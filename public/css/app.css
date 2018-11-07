@@ -23,6 +23,8 @@
 
     .collapse{
       flex: 0 1 100%;
+      justify-content: left;
+
     }
 
 .movieCover {
