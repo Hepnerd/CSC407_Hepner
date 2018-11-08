@@ -16,9 +16,9 @@ class DiskTableSeeder extends Seeder
         DB::table('disks')->delete();
 
         Disk::create(array(
-            'movie_ID' => '1',
+            'movie_ID' => '75',
             'type' => 'BlueRay',
-            'kiosk_ID' => '1',
+            'kiosk_ID' => '23',
         ));
     }
 }

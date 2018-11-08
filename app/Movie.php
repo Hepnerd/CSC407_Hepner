@@ -17,7 +17,6 @@ class Movie extends Model
     public function kiosks()
     {
         return $this->belongsToMany('App\Kiosk', 'disks')
-            ->withPivot('comment')
-            ->withTimestamp();
+            ->withPivot(['Type', 'id']);
     }
 }

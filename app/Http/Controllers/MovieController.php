@@ -124,9 +124,13 @@ class MovieController extends Controller
             $Movie->onDVD = $request['onDVD'];
         }
 
-        $Movie->coverPhoto = $request['coverPhoto'];
-
         $Movie->save();
+
+        if ($request->file('coverPhoto')) {
+            $this->savePicture($request, $Movie);
+        }
+
+
 
         return redirect()->route('movie.manage');
     }

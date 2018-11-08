@@ -18,12 +18,13 @@ class DiskController extends Controller
     {
         //
 
-        $disks = Movie::has('disk')
-            ->with('disk')
+
+        $disks = Movie::has('kiosks')
+            ->with('kiosks')
             ->get()
             ->toArray();
 
-        return view('disk.index')->with('disks', $disks);
+      return view('Disk/diskIndex')->with('disks', $disks);
     }
 
     /**
@@ -37,7 +38,7 @@ class DiskController extends Controller
         $Movie = Movie::get()->toArray();
         $Kiosk = Kiosk::get()->toArray();
 
-        return view('Disk/createDisk')->with('Movie', $Movie)->with('Kiosk', $Kiosk);
+        return view('Disk/diskCreate')->with('Movie', $Movie)->with('Kiosk', $Kiosk);
     }
 
     /**
@@ -51,9 +52,13 @@ class DiskController extends Controller
         //
         $movie_ID = $request->movie_ID;
         $kiosk_ID = $request->kiosk_ID;
+        $type = $request->type;
 
-        $disk = Movie::find();
+        $disk = Movie::find($movie_ID);
 
+        $disk->kiosks()->attach($kiosk_ID, ['Type' => $type]);
+
+        return redirect()->route('disk.index');
     }
 
     /**
@@ -76,6 +81,12 @@ class DiskController extends Controller
     public function edit(Disk $disk)
     {
         //
+        $Movie = Movie::get()->toArray();
+        $Kiosk = Kiosk::get()->toArray();
+
+        return view('Disk/diskUpdate')->with('disk', $disk)
+                                      ->with('Movie', $Movie)
+                                      ->with('Kiosk', $Kiosk);
     }
 
     /**
@@ -88,6 +99,14 @@ class DiskController extends Controller
     public function update(Request $request, Disk $disk)
     {
         //
+        $disk['movie_ID'] = $request->movie_ID;
+        $disk['Type'] = $request->type;
+        $disk['kiosk_ID'] = $request->kiosk_ID;
+
+        $disk->save();
+
+        return redirect()->route('disk.index');
+
     }
 
     /**
@@ -99,5 +118,11 @@ class DiskController extends Controller
     public function destroy(Disk $disk)
     {
         //
+        $selectedDelete = Disk::findOrFail($disk['id']);
+
+        if ($selectedDelete->delete()) {
+
+            return redirect()->route('disk.index');
+        }
     }
 }

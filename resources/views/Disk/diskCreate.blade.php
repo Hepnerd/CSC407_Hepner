@@ -3,13 +3,14 @@
 @section('content')
 <div class="container">
     <form method="POST" action="{{ route('disk.store') }}" class="form-horizontal">
+        @csrf
         <fieldset>
 
             <!-- Form Name -->
             <legend>Create A New Disk </legend>
 
             <!-- Select Basic -->
-            <div class="form-group">
+            <div class="form-group row">
                 <label class="col-md-4 control-label" for="movie_ID">Select Movie ID </label>
                 <div class="col-md-4">
                     <select id="movie_ID" name="movie_ID" class="form-control">
@@ -21,18 +22,18 @@
             </div>
 
             <!-- Select Basic -->
-            <div class="form-group">
+            <div class="form-group row">
                 <label class="col-md-4 control-label" for="type">Select Disk Type </label>
                 <div class="col-md-4">
                     <select id="type" name="type" class="form-control">
-                        <option value="1">DVD</option>
-                        <option value="2">BlueRay</option>
+                        <option value="DVD">DVD</option>
+                        <option value="BlueRay">BlueRay</option>
                     </select>
                 </div>
             </div>
 
             <!-- Select Basic -->
-            <div class="form-group">
+            <div class="form-group row">
                 <label class="col-md-4 control-label" for="kiosk_ID">Select Kiosk ID </label>
                 <div class="col-md-4">
                     <select id="kiosk_ID" name="kiosk_ID" class="form-control">

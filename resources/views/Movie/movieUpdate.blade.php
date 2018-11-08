@@ -103,7 +103,7 @@
                 <div class="form-group row">
                     <label class="col-md-4 control-label" for="coverPhoto" style="text-align: right">Movie Cover Photo</label>
                     <div class="col-md-4">
-                        <input id="coverPhoto" name="coverPhoto" class="input-file" type="file" value="{{ old('coverPhoto', $Movie['coverPhoto']) }}">
+                        <input id="coverPhoto" name="coverPhoto" class="input-file" type="file" value="/images/movie_{{$Movie['id']}}.jpg">
                     </div>
                 </div>
 
