@@ -23,7 +23,7 @@ class DiskController extends Controller
             ->with('kiosks')
             ->get()
             ->toArray();
-
+        //dd($disks);
       return view('Disk/diskIndex')->with('disks', $disks);
     }
 

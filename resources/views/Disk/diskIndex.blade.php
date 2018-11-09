@@ -15,11 +15,8 @@
         </thead>
         <tbody>
 
-        {{-- Loop through all of the people that rented a car --}}
         @foreach($disks as $disk)
 
-
-            {{-- Loop through all of the movies that has a kiosk --}}
             @foreach($disk['kiosks'] as $kiosk)
                 <tr>
                     <td style="text-align:center; padding-left: 45px;">{{ $disk['title'] }}</td>
