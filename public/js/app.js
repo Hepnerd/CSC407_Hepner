@@ -7,6 +7,8 @@ $(".movieCover").click(function() {
       var timeout = null;
       $(".flex-container").css("justify-content", "center");
 
+      $(".flex-item").css("width", "");
+
       $(".movieCover").not(this).each(function()
       {
         $(this).removeClass('collapse');
@@ -18,9 +20,10 @@ $(".movieCover").click(function() {
       $(this).addClass('clickedOn');
       $(this).removeClass('collapse');
 
+      $(".flex-item").css("width", "100%");
 
       $(".flex-container").css("justify-content", "left");
-      $(this).parent().children( '.movieTable' ).css("display", "block");
+      $(this).parent().parent().parent().children('.movieImageContainer').children('.movieTableHalf').children( '.movieTable' ).css("display", "block");
 
       $(".movieCover").not(this).each(function() {
           $(this).addClass("collapse");

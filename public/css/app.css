@@ -51,8 +51,35 @@
 .movieTable
 {
   display:none;
-  position: absolute;
+  width: 100%;
 }
-.movieTable tr:nth-child(odd) {
-  background-color: #eee;
+.movieTable th
+{
+  height: 50px;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size:20px;
+
+}
+.movieTable tr
+{
+  text-align: left;
+  height: 50px;
+  vertical-align: top;
+
+}
+
+.movieImageContainer
+{
+  width:100%;
+}
+.movieImageHalf
+{
+  float:left;
+}
+.movieTableHalf
+{
+  float:right;
+  padding-right: 25%;
 }
