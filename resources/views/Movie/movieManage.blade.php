@@ -2,17 +2,14 @@
 
 @section('content')
 <div class="container">
-    <h1 style="text-align:center; text-decoration: underline">Movie List</h1>
+  <legend class="updateLegend">Movie List</legend>
 
     <table class="Movie_table" align="center">
         <thead>
         <tr>
-            <th style="text-align:center;">Movie's Title</th>
-            <th style="text-align:center;padding-right: 45px; padding-left: 45px;">Description</th>
-            <th style="text-align:center; padding-right: 45px;">Genre ID</th>
-            <th style="text-align:center;"></th>
-            <th style="text-align:center;"></th>
-            <th style="text-align:center;"></th>
+            <th>Movie's Title</th>
+            <th>Description</th>
+            <th>Genre ID</th>
         </tr>
         </thead>
         <tbody>

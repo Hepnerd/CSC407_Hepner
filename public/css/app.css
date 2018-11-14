@@ -78,3 +78,39 @@
   float:right;
   padding-right: 5%;
 }
+
+.updateLegend
+{
+  text-align: center;
+  text-decoration: underline;
+  padding-bottom: 25px;
+}
+
+.updateTitleLabel
+{
+  text-align: right;
+}
+
+@media only screen and (max-width: 800px) {
+    .updateTitleLabel {
+      text-align: left;
+    }
+}
+
+.Movie_table th:first-child
+{
+  text-align:center;
+}
+
+.Movie_table th:last-child
+{
+  text-align:center;
+  padding-right: 45px;
+}
+
+.Movie_table th:nth-child(2)
+{
+  text-align:center;
+  padding-right: 45px;
+  padding-left: 45px;
+}
