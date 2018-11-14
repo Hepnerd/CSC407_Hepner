@@ -22,11 +22,6 @@
     align-items: flex-start;
     }
 
-    .collapse
-    {
-
-    }
-
 .movieCover {
     margin: 10px;
     height:380px;
@@ -43,7 +38,7 @@
 {
   margin:0px;
   height:auto;
-  width:200%;
+  width:100%;
   transition: all 300ms;
 
 }
@@ -81,5 +76,5 @@
 .movieTableHalf
 {
   float:right;
-  padding-right: 25%;
+  padding-right: 5%;
 }

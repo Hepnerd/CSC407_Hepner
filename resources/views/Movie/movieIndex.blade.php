@@ -13,11 +13,25 @@
                     <table class="movieTable" cellpadding="0" cellspacing="0" border="0">
                         <th>{{$movies['title']}}</th>
                       <tr>
-                        <td>Length: {{$movies['length']}}</td>
+                        <td>Length: {{$movies['length']}} minutes</td>
                       </tr>
                       <tr>
                         <td>Description: {{$movies['description']}}</td>
-
+                      </tr>
+                      <tr>
+                        <td>Description: {{$movies['description']}}</td>
+                      </tr>
+                      <tr>
+                        <td>Description: {{$movies['description']}}</td>
+                      </tr>
+                      <tr>
+                        <td>Description: {{$movies['description']}}</td>
+                      </tr>
+                      <tr>
+                        <td>Description: {{$movies['description']}}</td>
+                      </tr>
+                      <tr>
+                        <td>Description: {{$movies['description']}}</td>
                       </tr>
                     </table>
                   </div>
