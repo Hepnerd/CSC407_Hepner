@@ -8,11 +8,11 @@
             @csrf
             <fieldset>
                 <!-- Form Name -->
-                <legend style="text-align: center; text-decoration: underline; padding-bottom: 25px">Add A New customer </legend>
+                <legend class="updateLegend">Add A New customer </legend>
 
                 <!-- Text input-->
                 <div class="form-group row">
-                    <label class="col-md-4 control-label" for="name" style="text-align: right">customer name</label>
+                    <label class="col-md-4 control-label" for="name" class="updateTitleLabel">customer name</label>
                     <div class="col-md-4">
                         <input id="name" name="name" type="text" placeholder="Tom Cruise" class="form-control input-md" value="{{old('name')}}">
                         @if($errors->has('name'))
@@ -26,7 +26,7 @@
 
                 <!-- Text input-->
                 <div class="form-group row  text-right">
-                    <label class="col-md-4 control-label" for="email" style="text-align: right">customer email</label>
+                    <label class="col-md-4 control-label" for="email" class="updateTitleLabel">customer email</label>
                     <div class="col-md-4">
                         <input id="email" name="email" type="text" placeholder="thisisavalidemail at gmail.com " class="form-control input-md" value="{{old('email')}}">
                         @if($errors->has('email'))
@@ -40,7 +40,7 @@
 
                 <!-- Text input-->
                 <div class="form-group row  text-right">
-                    <label class="col-md-4 control-label" for="password" style="text-align: right">password</label>
+                    <label class="col-md-4 control-label" for="password" class="updateTitleLabel">password</label>
                     <div class="col-md-4">
                         <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
                         @if($errors->has('password'))
@@ -53,7 +53,7 @@
 
                 <!-- Text input-->
                 <div class="form-group row  text-right">
-                    <label class="col-md-4 control-label" for="confirmPassword" style="text-align: right">Confirm Password</label>
+                    <label class="col-md-4 control-label" for="confirmPassword" class="updateTitleLabel">Confirm Password</label>
                     <div class="col-md-4">
                         <input id="confirmPassword" name="ConfirmPassword" type="password" placeholder="" class="form-control input-md">
                         @if($errors->has('confirmPassword'))
@@ -77,5 +77,5 @@
         </form>
 
     </div>
-    
+
     @endsection
