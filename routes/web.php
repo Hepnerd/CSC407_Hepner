@@ -11,16 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/example', 'ExampleController@list');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 /**
  * Routes for kiosks
@@ -45,4 +35,19 @@ Route::resource('/customer', 'CustomerController');
  */
 Route::resource('/disk', 'DiskController');
 
+/**
+ * Routes for rentals
+ */
+Route::resource('/rental', 'RentalController');
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/example', 'ExampleController@list');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
 

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
        // $this->call(KioskTableSeeder::class);
         //$this->call(GenreTableSeeder::class);
         //$this->call(CustomerTableSeeder::class);
-        $this->call(DiskTableSeeder::class);
-
+        //$this->call(DiskTableSeeder::class);
+        $this->call(RentalTableSeeder::class);
     }
 }

@@ -23,7 +23,7 @@ class DiskController extends Controller
             ->with('kiosks')
             ->get()
             ->toArray();
-        //dd($disks);
+
       return view('Disk/diskIndex')->with('disks', $disks);
     }
 
@@ -84,7 +84,7 @@ class DiskController extends Controller
         $Movie = Movie::get()->toArray();
         $Kiosk = Kiosk::get()->toArray();
 
-        return view('Disk/diskUpdate')->with('disk', $disk)
+        return view('Disk.diskUpdate')->with('disk', $disk)
                                       ->with('Movie', $Movie)
                                       ->with('Kiosk', $Kiosk);
     }
@@ -118,9 +118,9 @@ class DiskController extends Controller
     public function destroy(Disk $disk)
     {
         //
-        $selectedDelete = Disk::findOrFail($disk['id']);
+        //$selectedDelete = Disk::findOrFail($disk['id']);
 
-        if ($selectedDelete->delete()) {
+        if ($disk->delete()) {
 
             return redirect()->route('disk.index');
         }
