@@ -56,6 +56,14 @@
                     </div>
                 </div>
 
+
+                <!-- Text input-->
+                <div class="form-group row">
+                    <div class="col-md-4">
+                      <input id="Rent_Date" name="Rent_Date" type="text" class="form-control input-md" value="" hidden>
+                    </div>
+                </div>
+
                 <!-- Button (Double) -->
                 <div class="form-group row">
                     <label class="col-md-4 control-label" for="submitButton"></label>
