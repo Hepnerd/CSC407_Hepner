@@ -26,8 +26,8 @@
                         <form method="POST" action="{{ route('customer.destroy', $Customers['id']) }}">
                             @method('DELETE')
                             @csrf
-                            <fieldset>
-                                <!-- Button -->
+                            <!--<fieldset>
+                                <!-- Button
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label" for="deleteButton"></label>
@@ -36,7 +36,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </fieldset>
+                            </fieldset> -->
+                            <td><a id="deleteButton" name="deleteButton" class="btn btn-danger">Delete</a></td>
+
                         </form>
 
                     </td>
