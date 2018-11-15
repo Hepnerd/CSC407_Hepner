@@ -23,7 +23,7 @@ class RentalController extends Controller
         $rentals = Disk::has('customers')
             ->with('customers')
             ->get()
-            ->where()
+            //->where()
             ->toArray();
 
         $movies = Movie::get()->toArray();
@@ -39,9 +39,6 @@ class RentalController extends Controller
      */
     public function create($id)
     {
-        Route::get('/rental/create/{$id}', 'RentalController@create');
-
-        Route::get('/rental/admin', 'RentalController@adminIndex');
         //
         $type = 'DVD';
 
