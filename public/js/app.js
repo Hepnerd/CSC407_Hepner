@@ -2,35 +2,40 @@
 
 $(document).ready(function()
 {
-  $('.onDVD').each(function() {
+  $('tr.onDVD').each(function() {
     var $customerId = $(this).find(".onDVDTD").html();
     //console.log($customerId);
     if ($customerId == "Available on DVD/BluRay: : 0")
     {
-    $('.onDVD').remove();
-    $('#MovieRentDVD').remove();
+    $(this).parent().children(".movieRentDVDTR").remove();
+    $(this).remove();
     //console.log("onDVD Removed");
   }
+  $(this).remove();
+
   });
-  $('.onBluRay').each(function() {
+  $('tr.onBluRay').each(function() {
     var $customerId = $(this).find(".onBluRayTD").html();
     //console.log($customerId);
     if ($customerId == "Available on DVD/BluRay: : 0")
     {
-    $('.onBluRay').remove();
-    $('#MovieRentBluRay').remove();
+    $(this).parent().children(".bluRayRentTR").remove();
+    $(this).remove();
+
     //console.log("BlueRay Removed");
   }
+  $(this).remove();
+
   });
 
   $('.movieTable tbody').each(function() {
     var onDVDExist = $(this).find("#MovieRentDVD").val();
     var onBluRayExist = $(this).find("#MovieRentBluRay").val();
-    console.log("here" + onDVDExist + onBluRayExist);
+    //console.log("here" + onDVDExist + onBluRayExist);
     if (onDVDExist != "" && onBluRayExist != "")
     {
       $(this).find('.noRentalOptions').html("No Rental Options Available");
-      console.log("enabled");
+      //console.log("enabled");
     }
 
 });
@@ -38,7 +43,7 @@ $(document).ready(function()
 $(".movieTable tbody tr td").each(function() {
       var cellText = $.trim($(this).text());
       if (cellText.length == 0) {
-          $(this).parent().hide();
+          $(this).parent().remove();
       }
   });
 

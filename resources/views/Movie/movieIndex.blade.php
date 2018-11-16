@@ -30,11 +30,11 @@
                       <tr>
                         <td class="noRentalOptions"></td>
                       </tr>
-                      <tr>
-                        <td><a href="/rental/create/{{ $movies['id'] }}/type/DVD" id="MovieRentDVD" name="MovieRentDVD" class="btn btn-success">Rent DVD</a></td>
+                      <tr class="movieRentDVDTR">
+                        <td class="movieRentDVDTD"><a href="/rental/create/{{ $movies['id'] }}/type/DVD" id="MovieRentDVD" name="MovieRentDVD" class="btn btn-success">Rent DVD</a></td>
                       </tr>
-                      <tr>
-                        <td><a href="/rental/create/{{ $movies['id'] }}/type/BlueRay" id="MovieRentBluRay" name="MovieRentBluRay" class="btn btn-success">Rent BluRay</a></td>
+                      <tr class="bluRayRentTR">
+                        <td class="bluRayRentTD"><a href="/rental/create/{{ $movies['id'] }}/type/BlueRay" id="MovieRentBluRay" name="MovieRentBluRay" class="btn btn-success">Rent BluRay</a></td>
                       </tr>
                     </table>
                   </div>
