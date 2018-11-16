@@ -8,7 +8,7 @@
                 <div class="movieImageContainer">
                   <div class="movieImageHalf">
                     <img class="movieCover" src="/images/movie_{{$movies['id']}}.jpg">
-                  </div class="movieImageHalf">
+                  </div>
                   <div class="movieTableHalf">
                     <button style="display:none;" type="button" class="close Movieclose" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -21,8 +21,20 @@
                       <tr>
                         <td>Description: {{$movies['description']}}</td>
                       </tr>
+                      <tr class="onDVD">
+                        <td class="">Available on DVD/BluRay: : {{$movies['onDVD']}}</td>
+                      </tr>
+                      <tr class="onBluRay">
+                        <td class="onBluRayTD">Available on DVD/BluRay: : {{$movies['onBlueRay']}}</td>
+                      </tr>
                       <tr>
                         <td><a href="/rental/create/{{ $movies['id'] }}" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Rent</a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="/rental/create/{{ $movies['id'] }}/type/DVD" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Rent DVD</a></td>
+                      </tr>
+                      <tr>
+                        <td><a href="/rental/create/{{ $movies['id'] }}/type/BlueRay" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Rent BluRay</a></td>
                       </tr>
                     </table>
                   </div>
