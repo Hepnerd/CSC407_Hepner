@@ -19,16 +19,17 @@ class RentalController extends Controller
     public function index()
     {
         //
-        //$rent = Rental::get()->toArray();
 
         $rentals = Disk::has('customers')
             ->with('customers')
             ->get()
+            //->where()
             ->toArray();
-        //dd($rent);
-        dd($rentals);
 
-        return view('rental/rentalIndex')->with('rentals', $rentals);
+        $movies = Movie::get()->toArray();
+        $kiosks = Kiosk::get()->toArray();
+
+        return view('rental/rentalIndex')->with('rentals', $rentals)->with('movies', $movies)->with('kiosks', $kiosks);
     }
 
     /**
@@ -36,18 +37,16 @@ class RentalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
         $type = 'DVD';
-        $ID = 76;
 
-        $disks = Disk::get()->where('Movie_ID', $ID)->where('Type', $type)->where('is?rented', '0')->toArray();
+        $disks = Disk::get()->where('Movie_ID', $id)->where('Type', $type)->where('is?rented', '0')->toArray();
         $customers = Customer::get()->toArray();
         $kiosks = Kiosk::get()->toArray();
-        $movie = Movie::get()->where('id', $ID)->toArray();
+        $movie = Movie::get()->where('id', $id)->toArray();
 
-        //dd($disks);
         return view('rental/rentalCreate')->with('customers', $customers)
             ->with('disks', $disks)
             ->with('kiosks', $kiosks)
@@ -67,11 +66,14 @@ class RentalController extends Controller
         $customer_id = $request->customer_ID;
         $movie_id = $request->movie_ID;
         $rental_Date = date('Y-m-d H:i:s');
-        
+
         $rental = Disk::find($disk_id);
         $rental['movie_ID'] = $rental['Movie_ID'];
 
-        $rental->customers()->attach($customer_id, ['Movie_ID' => $movie_id], ['Rent_Date' => $rental_Date]);
+        $rental->customers()->attach($customer_id, ['Movie_ID' => $movie_id], ['Rent_Date' => $rental_Date] );
+
+        //if the rental goes through
+        // go to the disk is?rented field and change the value.
 
 
         return redirect()->route('disk.index');
@@ -120,5 +122,21 @@ class RentalController extends Controller
     public function destroy(Rental $rental)
     {
         //
+    }
+
+    public function AdminIndex()
+    {
+        //
+
+        $rentals = Disk::has('customers')
+            ->with('customers')
+            ->get()
+            ->where('is?rented', '0')
+            ->toArray();
+
+        $movies = Movie::get()->toArray();
+        $kiosks = Kiosk::get()->toArray();
+
+        return view('rental/rentalIndex')->with('rentals', $rentals)->with('movies', $movies)->with('kiosks', $kiosks);
     }
 }
