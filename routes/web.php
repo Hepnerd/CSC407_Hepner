@@ -29,11 +29,11 @@ Route::resource('/disk', 'DiskController');
 /**
  * Routes for rentals
  */
-Route::get('/rental/create/{id}', 'RentalController@create');
+Route::get('/rental/create/{id}/type/{type}', 'RentalController@create');
 
 Route::get('/rental/admin', 'RentalController@adminIndex');
 
-Route::resource('/rental', 'RentalController');
+Route::resource('/rental', 'RentalController')->except(['create']);
 
 
 //

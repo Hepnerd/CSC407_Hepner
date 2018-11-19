@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('movie.update', $Movie['id']) }}">
+    <form method="POST" action="{{ route('movie.update', $Movie['id']) }}" enctype="multipart/form-data">
         @method('PUT')
         <fieldset>
             @csrf
@@ -103,7 +103,7 @@
                 <div class="form-group row">
                     <label class="col-md-4 control-label updateTitleLabel" for="coverPhoto">Movie Cover Photo</label>
                     <div class="col-md-4">
-                        <input id="coverPhoto" name="coverPhoto" class="input-file" type="file" value="/images/movie_{{$Movie['id']}}.jpg">
+                        <input id="coverPhoto" name="coverPhoto" class="input-file" type="file">
                     </div>
                 </div>
 

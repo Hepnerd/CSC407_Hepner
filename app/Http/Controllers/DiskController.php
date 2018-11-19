@@ -84,7 +84,7 @@ class DiskController extends Controller
         $Movie = Movie::get()->toArray();
         $Kiosk = Kiosk::get()->toArray();
 
-        return view('Disk.diskUpdate')->with('disk', $disk)
+        return view('Disk/diskUpdate')->with('disk', $disk)
                                       ->with('Movie', $Movie)
                                       ->with('Kiosk', $Kiosk);
     }

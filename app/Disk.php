@@ -17,6 +17,16 @@ class Disk extends Model
     public function customers()
     {
         return $this->belongsToMany('App\Customer', 'rentals')
-            ->withPivot(['id']);
+            ->withPivot(['id', 'Rent_Date']);
+    }
+
+    public function movie()
+    {
+        return $this->belongsTo('App\Movie', 'Movie_ID');
+    }
+
+    public function kiosk()
+    {
+        return $this->belongsTo('App\Kiosk', 'Kiosk_ID');
     }
 }
