@@ -22,19 +22,19 @@
                         <td>Description: {{$movies['description']}}</td>
                       </tr>
                       <tr class="onDVD">
-                        <td class="">Available on DVD/BluRay: : {{$movies['onDVD']}}</td>
+                        <td class="onDVDTD">Available on DVD/BluRay: : {{$movies['onDVD']}}</td>
                       </tr>
                       <tr class="onBluRay">
                         <td class="onBluRayTD">Available on DVD/BluRay: : {{$movies['onBlueRay']}}</td>
                       </tr>
                       <tr>
-                        <td><a href="/rental/create/{{ $movies['id'] }}" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Rent</a></td>
+                        <td class="noRentalOptions"></td>
                       </tr>
-                      <tr>
-                        <td><a href="/rental/create/{{ $movies['id'] }}/type/DVD" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Rent DVD</a></td>
+                      <tr class="movieRentDVDTR">
+                        <td class="movieRentDVDTD"><a href="/rental/create/{{ $movies['id'] }}/type/DVD" id="MovieRentDVD" name="MovieRentDVD" class="btn btn-success">Rent DVD</a></td>
                       </tr>
-                      <tr>
-                        <td><a href="/rental/create/{{ $movies['id'] }}/type/BlueRay" id="MovieAddButton" name="MovieAddButton" class="btn btn-success">Rent BluRay</a></td>
+                      <tr class="bluRayRentTR">
+                        <td class="bluRayRentTD"><a href="/rental/create/{{ $movies['id'] }}/type/BlueRay" id="MovieRentBluRay" name="MovieRentBluRay" class="btn btn-success">Rent BluRay</a></td>
                       </tr>
                     </table>
                   </div>
