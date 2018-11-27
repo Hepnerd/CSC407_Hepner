@@ -35,6 +35,10 @@ Route::get('/rental/admin', 'RentalController@adminIndex');
 
 Route::resource('/rental', 'RentalController')->except(['create']);
 
+/*
+Routes for reviews
+*/
+Route::resource('/review', 'ReviewController');
 
 //
 
@@ -47,6 +51,3 @@ Route::get('/example', 'ExampleController@list');
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/', 'MovieController');
-
-
-
