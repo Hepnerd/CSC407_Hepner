@@ -40,9 +40,11 @@
                         <td><a href="/review/create/{{ $movies['id'] }}" class="btn btn-success">Create Review</a></td>
                       </tr>
                       @foreach($review as $reviews)
+                      @if($reviews['movie_id'] == $movies['id'])
                     <tr>
-                        <td><i>{{$reviews['review']}}</i></td>
+                        <td><i>{{$reviews['review']}}</i> - {{$reviews['rating']}}/10</td>
                       </tr>
+                      @endif
                       @endforeach
                     </table>
                   </div>
