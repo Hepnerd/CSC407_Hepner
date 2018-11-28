@@ -36,6 +36,9 @@
                       <tr class="bluRayRentTR">
                         <td class="bluRayRentTD"><a href="/rental/create/{{ $movies['id'] }}/type/BlueRay" id="MovieRentBluRay" name="MovieRentBluRay" class="btn btn-success">Rent BluRay</a></td>
                       </tr>
+                      <tr>
+                        <td><a href="/review/create/{{ $movies['id'] }}" class="btn btn-success">Create Review</a></td>
+                      </tr>
                     </table>
                   </div>
                   </div>

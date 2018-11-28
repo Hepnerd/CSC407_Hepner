@@ -25,11 +25,11 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id, $type)
+    public function create($id)
     {
       //
-      return view('review/reviewCreate');
-      }
+      return view('review/reviewCreate')->with('movie_id',$id);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -82,6 +82,13 @@ class ReviewController extends Controller
         //
     }
 
+    public function manage()
+    {
+        //
+        $review = Review::get()->toArray();
+
+        return view('Review/ReviewIndex');
+    }
     /**
      * Remove the specified resource from storage.
      *
