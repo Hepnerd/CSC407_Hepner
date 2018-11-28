@@ -15,7 +15,9 @@ class ReviewController extends Controller
     public function index()
     {
         //
-        dd('Testing');
+        $review = Review::get()->toArray();
+
+        return view('Review/reviewIndex')->with('review', $review);
     }
 
     /**
@@ -23,10 +25,11 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id, $type)
     {
-        //
-    }
+      //
+      return view('review/reviewCreate');
+      }
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +39,13 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //
+      $input=$request->all();
+
+      $review = new Review($input);
+      $review->save();
+
+      return redirect()->route('review.index');
     }
 
     /**

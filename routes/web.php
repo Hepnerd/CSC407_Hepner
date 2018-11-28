@@ -38,8 +38,9 @@ Route::resource('/rental', 'RentalController')->except(['create']);
 /*
 Routes for reviews
 */
-Route::resource('/review', 'ReviewController');
-
+Route::resource('/review', 'ReviewController')->except(['create']);;
+Route::get('/review/create/{id}/type/{type}', 'ReviewController@create');
+Route::get('/review/admin', 'ReviewController@adminIndex');
 //
 
 
