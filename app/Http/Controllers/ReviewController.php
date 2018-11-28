@@ -45,7 +45,7 @@ class ReviewController extends Controller
       $review = new Review($input);
       $review->save();
 
-      return redirect()->route('review.index');
+      return redirect()->route('movie.index');
     }
 
     /**

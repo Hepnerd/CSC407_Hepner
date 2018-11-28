@@ -58,6 +58,7 @@ var timeout = null;
 $(".flex-container").css("justify-content", "center");
 
 $(".flex-item").css("width", "");
+$(".movieImageHalf").css("margin-left", "");
 
 $(".movieCover").not(this).each(function()
 {
@@ -75,6 +76,7 @@ $(".movieCover").click(function() {
       $(".flex-container").css("justify-content", "center");
 
       $(".flex-item").css("width", "");
+      $(".movieImageHalf").css("margin-left", "");
 
       $(".movieCover").not(this).each(function()
       {
@@ -88,6 +90,7 @@ $(".movieCover").click(function() {
       $(this).removeClass('collapse');
 
       $(".flex-item").css("width", "100%");
+      $(".movieImageHalf").css("margin-left", "30%");
 
       $(".flex-container").css("justify-content", "left");
       $(this).parent().parent().parent().children('.movieImageContainer').children('.movieTableHalf').children( '.movieTable' ).css("display", "block");

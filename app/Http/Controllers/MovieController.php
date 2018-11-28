@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Genre;
 use App\Http\Requests\MovieValidation;
 use App\Movie;
+use App\Review;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -22,8 +23,9 @@ class MovieController extends Controller
         //
 
         $Movie = Movie::get()->toArray();
+        $Review = Review::get()->toArray();
 
-        return view('Movie/MovieIndex')->with('movie', $Movie);
+        return view('Movie/MovieIndex')->with('movie', $Movie)->with('review', $Review);
     }
 
     /**

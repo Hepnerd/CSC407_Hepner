@@ -39,6 +39,11 @@
                       <tr>
                         <td><a href="/review/create/{{ $movies['id'] }}" class="btn btn-success">Create Review</a></td>
                       </tr>
+                      @foreach($review as $reviews)
+                    <tr>
+                        <td><i>{{$reviews['review']}}</i></td>
+                      </tr>
+                      @endforeach
                     </table>
                   </div>
                   </div>
