@@ -19,6 +19,7 @@ class CreateDisksTable extends Migration
             $table->string('Movie_ID', 64);
             $table->string('Type', 64);
             $table->string('Kiosk_ID', 64);
+            $table->string('is?rented', 64);
             $table->string('Status', 64);
 
             $table->softDeletes();

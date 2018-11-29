@@ -13,9 +13,9 @@
 
         <!-- Select Basic -->
         <div class="form-group row">
-            <label class="col-md-4 control-label" for="customer_ID">Customer Name </label>
+            <label class="col-md-4 control-label" for="customer_id">Customer Name </label>
             <div class="col-md-4">
-                <select id="customer_ID" name="customer_ID" class="form-control">
+                <select id="customer_ID" name="customer_id" class="form-control">
                     @foreach($customers as $customer )
                         <option value="{{ $customer['id'] }}">{{ $customer['name'] }}</option>
                     @endforeach

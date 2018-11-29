@@ -21,7 +21,7 @@
 
                 <!-- Select Basic -->
                 <div class="form-group row">
-                    <label class="col-md-4 control-label" for="disk_ID">Select Desired Movie </label>
+                    <label class="col-md-4 control-label" for="disk_ID">Select Desired Kiosk</label>
                     <div class="col-md-4">
                         <select id="disk_ID" name="disk_ID" class="form-control">
                             @foreach($kiosks as $kiosk)
