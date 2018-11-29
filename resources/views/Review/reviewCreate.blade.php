@@ -7,7 +7,21 @@
         @csrf
         <div class="container col-xs-12">
         <!-- Form Name -->
-        <legend class="updateLegend">Create A New Review</legend>
+        @foreach($movies as $movie)
+        <legend class="updateLegend">Create A New Review for {{$movie['title']}}</legend>
+        @endforeach
+
+        <!-- Select Basic -->
+        <div class="form-group row">
+            <label class="col-md-4 control-label" for="customer_ID">Customer Name </label>
+            <div class="col-md-4">
+                <select id="customer_ID" name="customer_ID" class="form-control">
+                    @foreach($customers as $customer )
+                        <option value="{{ $customer['id'] }}">{{ $customer['name'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
         <!-- Text input-->
         <div class="form-group row">
@@ -40,8 +54,7 @@
                 @endif
             </div>
         </div>
-        <input type="hidden" id="customer_id" name="customer_id" value="1">
-          <input type="hidden" id="movie_id" name="movie_id" value="{{ $movie_id }}">
+          <input type="hidden" id="movie_id" name="movie_id" value="{{ $movie['id'] }}">
         <!-- Button (Double) -->
         <div class="form-group row">
             <label class="col-md-4 control-label updateTitleLabel" for="submitButton"></label>

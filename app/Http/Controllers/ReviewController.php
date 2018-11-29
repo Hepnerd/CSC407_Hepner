@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Review;
+use App\Movie;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -28,7 +30,10 @@ class ReviewController extends Controller
     public function create($id)
     {
       //
-      return view('review/reviewCreate')->with('movie_id',$id);
+      $movie = Movie::get()->where('id', $id)->toArray();
+      $customers = Customer::get()->toArray();
+
+      return view('review/reviewCreate')->with('movies', $movie)->with('customers', $customers);
     }
 
     /**
