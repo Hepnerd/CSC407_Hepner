@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Review;
 use App\Movie;
 use App\Customer;
+use App\Rental;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -30,6 +31,7 @@ class ReviewController extends Controller
     public function create($id)
     {
       //
+
       $movie = Movie::get()->where('id', $id)->toArray();
       $customers = Customer::get()->toArray();
 
@@ -85,6 +87,13 @@ class ReviewController extends Controller
     public function update(Request $request, Review $review)
     {
         //
+    }
+
+    public function adminIndex()
+    {
+      $review = Review::get()->toArray();
+
+      return view('Review/reviewIndex')->with('review', $review);
     }
 
     public function manage()
