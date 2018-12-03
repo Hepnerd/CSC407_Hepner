@@ -9,6 +9,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/rental/create/{id}/type/{type}', 'RentalController@create');
+
+    Route::get('/rental/admin', 'RentalController@adminIndex');
+
+    Route::resource('/rental', 'RentalController')->except(['create']);
+});
+
 /**
  * Routes for kiosks
  */
@@ -29,11 +37,7 @@ Route::resource('/disk', 'DiskController');
 /**
  * Routes for rentals
  */
-Route::get('/rental/create/{id}/type/{type}', 'RentalController@create');
 
-Route::get('/rental/admin', 'RentalController@adminIndex');
-
-Route::resource('/rental', 'RentalController')->except(['create']);
 
 /*
 Routes for reviews

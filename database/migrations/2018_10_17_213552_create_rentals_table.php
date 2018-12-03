@@ -21,6 +21,7 @@ class CreateRentalsTable extends Migration
             $table->string('Customer_ID', 64);
             $table->string('Rent_Date', 64);
             $table->string('Return_Date', 64);
+            $table->varchar('Returned_To', 64);
 
 
             $table->softDeletes();

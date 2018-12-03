@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Disk extends Model
 {
@@ -16,8 +17,17 @@ class Disk extends Model
 
     public function customers()
     {
-        return $this->belongsToMany('App\Customer', 'rentals')
-            ->withPivot(['id', 'Rent_Date']);
+        if (Auth::user()->email == 'brettwebb63@gmail.com')
+        {
+            return $this->belongsToMany('App\Customer', 'rentals')->withPivot(['id', 'Rent_Date', 'Return_Date', 'Returned_To'])
+                ->orderBy('Return_Date');
+         }
+        else
+        {
+            return $this->belongsToMany('App\Customer', 'rentals')->withPivot(['id', 'Rent_Date', 'Return_Date', 'Returned_To'])
+                                                                    ->orderBy('Return_Date')
+                                                                    ->wherePivot('Customer_ID', Auth::user()->id);
+        }
     }
 
     public function movie()

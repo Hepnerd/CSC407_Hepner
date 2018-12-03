@@ -8,6 +8,7 @@ use App\Customer;
 use App\Movie;
 use App\Rental;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RentalController extends Controller
 {
@@ -20,18 +21,15 @@ class RentalController extends Controller
     {
         //
 
+        $kiosks = Kiosk::get()->toArray();
         $rentals = Disk::has('customers')
             ->with('customers')
             ->with('movie')
             ->with('kiosk')
             ->get()
-            //->where()
             ->toArray();
 
-        //$movies = Movie::get()->toArray();
-        //$kiosks = Kiosk::get()->toArray();
-
-        return view('rental/rentalIndex')->with('rentals', $rentals);//->with('movies', $movies)->with('kiosks', $kiosks);
+        return view('rental/rentalIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
     }
 
     /**
@@ -65,7 +63,7 @@ class RentalController extends Controller
     {
         //
         $disk_id = $request->disk_ID;
-        $customer_id = $request->customer_ID;
+        $customer_id = Auth::user()->id;
         $movie_id = $request->movie_ID;
         $rental_Date = date('m-d-Y');
 
@@ -118,15 +116,16 @@ class RentalController extends Controller
     public function update(Request $request, Rental $rental)
     {
         //
-        $return_Date = date('m-d-Y');
+        $return_Date = date('m-d-Y H:i:s');
         $rental->Return_Date = $return_Date;
+        $rental->Returned_To = $request['Kiosk_ID'];
         $rental->save();
 
         $disk_id = $rental['Disk_ID'];
         $returnKiosk=$request->Kiosk_ID;
 
         Disk::where('id', $disk_id)->update(['is?rented'=>0, 'Kiosk_ID'=> $returnKiosk]);
-
+        return redirect()->route('rental.index');
     }
 
     /**
@@ -144,15 +143,14 @@ class RentalController extends Controller
     {
         //
 
+        $kiosks = Kiosk::get()->toArray();
         $rentals = Disk::has('customers')
             ->with('customers')
+            ->with('movie')
+            ->with('kiosk')
             ->get()
-            ->where('is?rented', '0')
             ->toArray();
 
-        $movies = Movie::get()->toArray();
-        $kiosks = Kiosk::get()->toArray();
-
-        return view('rental/rentalIndex')->with('rentals', $rentals)->with('movies', $movies)->with('kiosks', $kiosks);
+        return view('rental/rentalAdminIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
     }
 }

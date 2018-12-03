@@ -35,18 +35,6 @@
                     </div>
                 </div>
 
-                <!-- Select Basic -->
-                <div class="form-group row">
-                    <label class="col-md-4 control-label" for="customer_ID">Customer Name </label>
-                    <div class="col-md-4">
-                        <select id="customer_ID" name="customer_ID" class="form-control">
-                            @foreach($customers as $customer )
-                                <option value="{{ $customer['id'] }}">{{ $customer['name'] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
                 <!-- Text input-->
                 <div class="form-group row">
                     <div class="col-md-4">
