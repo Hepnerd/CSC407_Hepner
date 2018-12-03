@@ -56,6 +56,22 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/rental/admin">
+                      <!--                 onclick="event.preventDefault(); -->
+                                        Rental Index
+                                    </a>
+                                    <a class="dropdown-item" href="/kiosk">
+                      <!--                 onclick="event.preventDefault(); -->
+                                        Kiosk Index
+                                    </a>
+                                    <a class="dropdown-item" href="/disk">
+                      <!--                 onclick="event.preventDefault(); -->
+                                        Disk Index
+                                    </a>
+                                    <a class="dropdown-item" href="/customer">
+                      <!--                 onclick="event.preventDefault(); -->
+                                        Customer Index
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

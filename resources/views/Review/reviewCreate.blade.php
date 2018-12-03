@@ -11,18 +11,6 @@
         <legend class="updateLegend">Create A New Review for {{$movie['title']}}</legend>
         @endforeach
 
-        <!-- Select Basic -->
-        <div class="form-group row">
-            <label class="col-md-4 control-label" for="customer_id">Customer Name </label>
-            <div class="col-md-4">
-                <select id="customer_ID" name="customer_id" class="form-control">
-                    @foreach($customers as $customer )
-                        <option value="{{ $customer['id'] }}">{{ $customer['name'] }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
         <!-- Text input-->
         <div class="form-group row">
             <label class="col-md-4 control-label updateTitleLabel updateTitleLabel" for="review">Review</label>
