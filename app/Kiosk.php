@@ -15,6 +15,8 @@ class Kiosk extends Model
       'location', 'address',
     ];
 
+
+
     public function movies()
     {
         return $this->belongsToMany('App\Movie', 'disks')

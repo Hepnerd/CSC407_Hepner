@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\KioskValidation;
+use App\Movie;
 use App\Kiosk;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KioskController extends Controller
 {
@@ -14,6 +16,8 @@ class KioskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         //
@@ -30,6 +34,8 @@ class KioskController extends Controller
     public function create()
     {
         //
+        $this->isAuthorized();
+
         return view('Kiosk/kioskCreate');
     }
 
@@ -109,11 +115,20 @@ class KioskController extends Controller
         //
         $selectedDelete = Kiosk::findOrFail($kiosk['id']);
 
-
-
         if($selectedDelete->delete()){
 
             return redirect()->route('kiosk.index');
         }
+    }
+
+    public function isAuthorized()
+    {
+        if(Auth::user()->email == 'brettwebb63@gmail.com'){
+            dd(Auth::user());
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
+
     }
 }
