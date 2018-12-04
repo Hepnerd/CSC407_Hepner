@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 style="text-align:center; text-decoration: underline">Disk List</h1>
+    <h1 style="text-align:center; text-decoration: underline">Disk List <a href="{{route('disk.create')}}" id="diskAddButton" name="diskAddButton" class="btn btn-success">Add</a></h1>
 
     <table class="disk_table" align="center">
         <thead>
@@ -28,17 +28,7 @@
                         <form method="POST" action="{{ route('disk.destroy', $kiosk['pivot']['id']) }}">
                             @method('DELETE')
                             @csrf
-                            <fieldset>
-                                <!-- Button -->
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="deleteButton"></label>
-                                        <div class="col-md-4">
                                             <button id="deleteButton" name="deleteButton" class="btn btn-danger">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
                         </form>
 
                     </td>

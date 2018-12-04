@@ -34,7 +34,7 @@
                             @endif
                         @endforeach
                             @endif
-
+                              <td><a href="/review/create/{{ $movies['id'] }}" class="btn btn-success">Create Review</a></td>
                     @if($customer['pivot']['Return_Date'] == null)
                     <td><a href="{{route('rental.edit', $customer['pivot']['id'])}}" id="rentalReturnButton" name="rentalReturnButton" class="btn btn-primary">Return</a></td>
                     @else

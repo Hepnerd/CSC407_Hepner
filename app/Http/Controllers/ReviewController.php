@@ -48,9 +48,13 @@ class ReviewController extends Controller
     {
       //
       $input=$request->all();
+      $customer_id = Auth::user()->id;
 
-      $review = new Review($input);
-      $review->save();
+      $review->reviews()->attach($customer_id);
+
+
+      //$review = new Review($input);
+      //$review->save();
 
       return redirect()->route('movie.index');
     }
@@ -91,6 +95,8 @@ class ReviewController extends Controller
 
     public function adminIndex()
     {
+      $customer_id = Auth::user()->id;
+
       $review = Review::get()->toArray();
 
       return view('Review/reviewIndex')->with('review', $review);
@@ -99,7 +105,9 @@ class ReviewController extends Controller
     public function manage()
     {
         //
-        $review = Review::get()->toArray();
+        $customer_id = Auth::user()->id;
+
+        $review = Review::where('id', $customer_id)->get()->toArray();
 
         return view('Review/ReviewIndex');
     }

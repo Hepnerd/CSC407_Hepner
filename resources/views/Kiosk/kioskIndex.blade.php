@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1 style="text-align:center; text-decoration: underline">Kiosk List</h1>
+    <h1 style="text-align:center; text-decoration: underline">Kiosk List <a href="{{route('kiosk.create')}}" id="kioskAddButton" name="kioskAddButton" class="btn btn-success">Add</a></h1>
+
 
     <table class="kiosk_table" align="center">
         <thead>
@@ -19,15 +20,15 @@
             <tr>
                 <td>{{ $kiosks['location'] }}</td>
                 <td style="text-align:center; padding-right: 45px; padding-left: 45px;">{{ $kiosks['address'] }}</td>
-                <td><a href="{{route('kiosk.create')}}" id="kioskAddButton" name="kioskAddButton" class="btn btn-success">Add</a></td></td>
                 <td><a href="{{route('kiosk.edit', $kiosks['id'])}}" id="kioskEditButton" name="kioskEditButton" class="btn btn-primary">Edit</a></td>
                 <td>
 
                     <form method="POST" action="{{ route('kiosk.destroy', $kiosks['id']) }}">
                         @method('DELETE')
                         @csrf
+                        <button id="deleteButton" name="deleteButton" class="btn btn-danger">Delete</button>
+<!--
                         <fieldset>
-                            <!-- Button -->
                             <div class="form-group">
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="deleteButton"></label>
@@ -37,6 +38,7 @@
                                 </div>
                             </div>
                         </fieldset>
+                      -->
                     </form>
 
                 </td>
