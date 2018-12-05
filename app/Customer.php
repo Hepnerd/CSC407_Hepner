@@ -22,4 +22,10 @@ class Customer extends Authenticatable
             ->withPivot('comment')
             ->withTimestamps();
     }
+
+
+    public function reviews()
+    {
+      return $this->belongsToMany('App\Customer', 'reviews')->withPivot(['customer_id']);
+    }
 }

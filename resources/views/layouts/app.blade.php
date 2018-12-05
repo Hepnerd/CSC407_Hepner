@@ -50,6 +50,8 @@
                                 @endif
                             </li>
                         @else
+                        @if (Auth::user()->email == 'brettwebb63@gmail.com')
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -72,6 +74,13 @@
                       <!--                 onclick="event.preventDefault(); -->
                                         Customer Index
                                     </a>
+                                    @endif
+                                    @if (Auth::user()->email != 'brettwebb63@gmail.com')
+                                    <a class="dropdown-item" href="#">
+                      <!--                 onclick="event.preventDefault(); -->
+                                        Test
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

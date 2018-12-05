@@ -6,6 +6,7 @@ use App\Review;
 use App\Movie;
 use App\Customer;
 use App\Rental;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -18,7 +19,9 @@ class ReviewController extends Controller
     public function index()
     {
         //
-        $review = Review::get()->toArray();
+        //$customer_id = Auth::user()->id;
+
+        $review = Review::get()->where('id', $id)->toArray();
 
         return view('Review/reviewIndex')->with('review', $review);
     }
@@ -47,14 +50,18 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
       //
-      $input=$request->all();
+      $review=$request->all();
       $customer_id = Auth::user()->id;
+      //dd($review);
 
       $review->reviews()->attach($customer_id);
+      //$review->customer_id=$customer_id;
+      dd($review);
 
 
-      //$review = new Review($input);
-      //$review->save();
+
+      //$review = new Review($review);
+      $review->save();
 
       return redirect()->route('movie.index');
     }
