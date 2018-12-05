@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
 
         // $this->call(UsersTableSeeder::class);
         //$this->call(MovieTableSeeder::class);
-       // $this->call(KioskTableSeeder::class);
+        //$this->call(KioskTableSeeder::class);
         //$this->call(GenreTableSeeder::class);
         //$this->call(CustomerTableSeeder::class);
         //$this->call(DiskTableSeeder::class);
-        $this->call(RentalTableSeeder::class);
+        //$this->call(RentalTableSeeder::class);
     }
 }

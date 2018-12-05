@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Http\Requests\CustomerValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -18,8 +19,12 @@ class CustomerController extends Controller
         //
         $Customer = Customer::get()->toArray();
 
-        return view('Customer/customerIndex')->with('Customer', $Customer);
-
+        if($this->isAuthorized()){
+            return view('Customer/customerIndex')->with('Customer', $Customer);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -102,5 +107,16 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         //
+    }
+    public function isAuthorized()
+    {
+        //
+        if(Auth::user()->email == 'brettwebb63@gmail.com'){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

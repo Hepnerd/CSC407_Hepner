@@ -16,14 +16,17 @@ class KioskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
     {
         //
         $kiosk = Kiosk::get()->toArray();
 
-        return view('Kiosk/kioskIndex')->with('kiosk', $kiosk);
+        if($this->isAuthorized()){
+            return view('Kiosk/kioskIndex')->with('kiosk', $kiosk);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -34,9 +37,12 @@ class KioskController extends Controller
     public function create()
     {
         //
-        $this->isAuthorized();
-
-        return view('Kiosk/kioskCreate');
+        if($this->isAuthorized()){
+            return view('Kiosk/kioskCreate');
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -48,9 +54,7 @@ class KioskController extends Controller
     public function store(KioskValidation $request)
     {
         //
-
         $input=$request->all();
-
         $kiosk = new Kiosk($input);
         $kiosk->save();
 
@@ -80,8 +84,12 @@ class KioskController extends Controller
     public function edit(Kiosk $kiosk)
     {
         //
-
-        return view('Kiosk/kioskUpdate')->with('kiosk', $kiosk);
+        if($this->isAuthorized()){
+            return view('Kiosk/kioskUpdate')->with('kiosk', $kiosk);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -123,11 +131,12 @@ class KioskController extends Controller
 
     public function isAuthorized()
     {
+        //
         if(Auth::user()->email == 'brettwebb63@gmail.com'){
-            dd(Auth::user());
+            return true;
         }
         else{
-            return redirect()->action('MovieController@index');
+            return false;
         }
 
     }

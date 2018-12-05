@@ -6,6 +6,7 @@ use App\Disk;
 use App\Movie;
 use App\Kiosk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiskController extends Controller
 {
@@ -17,14 +18,17 @@ class DiskController extends Controller
     public function index()
     {
         //
-
-
         $disks = Movie::has('kiosks')
             ->with('kiosks')
             ->get()
             ->toArray();
 
-      return view('Disk/diskIndex')->with('disks', $disks);
+        if($this->isAuthorized()){
+            return view('Disk/diskIndex')->with('disks', $disks);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -38,7 +42,12 @@ class DiskController extends Controller
         $Movie = Movie::get()->toArray();
         $Kiosk = Kiosk::get()->toArray();
 
-        return view('Disk/diskCreate')->with('Movie', $Movie)->with('Kiosk', $Kiosk);
+        if($this->isAuthorized()){
+            return view('Disk/diskCreate')->with('Movie', $Movie)->with('Kiosk', $Kiosk);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -53,7 +62,6 @@ class DiskController extends Controller
         $movie_ID = $request->movie_ID;
         $kiosk_ID = $request->kiosk_ID;
         $type = $request->type;
-
         $disk = Movie::find($movie_ID);
 
         $disk->kiosks()->attach($kiosk_ID, ['Type' => $type]);
@@ -84,9 +92,14 @@ class DiskController extends Controller
         $Movie = Movie::get()->toArray();
         $Kiosk = Kiosk::get()->toArray();
 
-        return view('Disk/diskUpdate')->with('disk', $disk)
-                                      ->with('Movie', $Movie)
-                                      ->with('Kiosk', $Kiosk);
+        if($this->isAuthorized()){
+            return view('Disk/diskUpdate')->with('disk', $disk)
+                ->with('Movie', $Movie)
+                ->with('Kiosk', $Kiosk);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -106,7 +119,6 @@ class DiskController extends Controller
         $disk->save();
 
         return redirect()->route('disk.index');
-
     }
 
     /**
@@ -118,11 +130,21 @@ class DiskController extends Controller
     public function destroy(Disk $disk)
     {
         //
-        //$selectedDelete = Disk::findOrFail($disk['id']);
-
         if ($disk->delete()) {
 
             return redirect()->route('disk.index');
         }
+    }
+
+    public function isAuthorized()
+    {
+        //
+        if(Auth::user()->email == 'brettwebb63@gmail.com'){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

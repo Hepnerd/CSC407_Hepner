@@ -9,10 +9,10 @@ use App\Review;
 use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
-    //
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +21,6 @@ class MovieController extends Controller
     public function index()
     {
         //
-
         $Movie = Movie::get()->toArray();
         $Review = Review::get()->toArray();
 
@@ -39,7 +38,12 @@ class MovieController extends Controller
         $Genres = Genre::get()->toArray();
         $Movie = Movie::get()->toArray();
 
-        return view('Movie/MovieManage')->with('Movie', $Movie)->with('Genres', $Genres);
+        if($this->isAuthorized()){
+            return view('Movie/MovieManage')->with('Movie', $Movie)->with('Genres', $Genres);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -50,7 +54,12 @@ class MovieController extends Controller
     public function create()
     {
         //
-        return view('Movie/MovieCreate');
+        if($this->isAuthorized()){
+            return view('Movie/MovieCreate');
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -63,9 +72,7 @@ class MovieController extends Controller
     {
         //
         $input = $request->all();
-
         $Movie = new Movie($input);
-
         $Movie->save();
 
         if ($request->file('coverPhoto')) {
@@ -73,7 +80,6 @@ class MovieController extends Controller
         }
 
         return redirect()->route('movie.manage');
-
     }
 
     /**
@@ -84,9 +90,8 @@ class MovieController extends Controller
      */
     public function show(Movie $Movie)
     {
-        //dd($Movie[0]);
+        //
         return view('MovieUpdate')->with('Movie', $Movie[0]);
-
     }
 
     /**
@@ -97,9 +102,15 @@ class MovieController extends Controller
      */
     public function edit(Movie $Movie)
     {
+        //
         $genres = Genre::get()->toArray();
 
-        return view('Movie/MovieUpdate')->with('Movie', $Movie)->with('Genres', $genres);
+        if($this->isAuthorized()){
+            return view('Movie/MovieUpdate')->with('Movie', $Movie)->with('Genres', $genres);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
     }
 
     /**
@@ -112,7 +123,6 @@ class MovieController extends Controller
     public function update(MovieValidation $request, Movie $Movie)
     {
         //
-
         $Movie->title = $request['title'];
         $Movie->length = $request['length'];
         $Movie->description = $request['description'];
@@ -132,8 +142,6 @@ class MovieController extends Controller
             $this->savePicture($request, $Movie);
         }
 
-
-
         return redirect()->route('movie.manage');
     }
 
@@ -145,6 +153,7 @@ class MovieController extends Controller
      */
     public function destroy(Movie $Movie)
     {
+        //
         $selectedDelete = Movie::findOrFail($Movie['id']);
         if ($selectedDelete->delete()) {
 
@@ -168,5 +177,17 @@ class MovieController extends Controller
         }
 
         Storage::disk('web')->put($filename, $image->getEncoded());
+    }
+
+    public function isAuthorized()
+    {
+        //
+        if(Auth::user()->email == 'brettwebb63@gmail.com'){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

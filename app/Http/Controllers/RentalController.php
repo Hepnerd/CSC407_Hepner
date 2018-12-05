@@ -20,7 +20,6 @@ class RentalController extends Controller
     public function index()
     {
         //
-
         $kiosks = Kiosk::get()->toArray();
         $rentals = Disk::has('customers')
             ->with('customers')
@@ -40,11 +39,9 @@ class RentalController extends Controller
     public function create($id, $type)
     {
         //
-
         $disks = Disk::where('Movie_ID', $id)->where('Type', $type)->where('is?rented', '0')->get()->toArray();
         $customers = Customer::get()->toArray();
         $kiosks = Kiosk::get()->toArray();
-      
         $movie = Movie::get()->where('id', $id)->toArray();
 
         return view('rental/rentalCreate')->with('customers', $customers)
@@ -67,13 +64,11 @@ class RentalController extends Controller
         $movie_id = $request->movie_ID;
         $rental_Date = date('m-d-Y');
 
-
         $rental = Disk::find($disk_id);
 
         $rental->customers()->attach($customer_id, ['Movie_ID' => $movie_id , 'Rent_Date' => $rental_Date] );
 
-        //if the rental goes through
-        // go to the disk is?rented field and change the value.
+        //if the rental goes through, go to the disk is?rented field and change the value.
         Disk::where('id', $disk_id )->update(['is?Rented' => 1, 'kiosk_ID' => null]);
 
         return redirect()->route('rental.index');
@@ -99,11 +94,9 @@ class RentalController extends Controller
     public function edit(Rental $rental)
     {
         //
-
         $kiosks = Kiosk::get()->toArray();
 
         return view('rental/rentalReturn')->with('rental', $rental)->with('kiosks', $kiosks);
-
     }
 
     /**
@@ -142,7 +135,6 @@ class RentalController extends Controller
     public function AdminIndex()
     {
         //
-
         $kiosks = Kiosk::get()->toArray();
         $rentals = Disk::has('customers')
             ->with('customers')
@@ -151,6 +143,23 @@ class RentalController extends Controller
             ->get()
             ->toArray();
 
-        return view('rental/rentalAdminIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
+        if($this->isAuthorized()){
+            return view('rental/rentalAdminIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
+        }
+        else{
+            return redirect()->action('MovieController@index');
+        }
+    }
+
+    public function isAuthorized()
+    {
+        //
+        if(Auth::user()->email == 'brettwebb63@gmail.com'){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }
