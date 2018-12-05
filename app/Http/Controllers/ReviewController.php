@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\Review;
 use App\Movie;
-use App\Customer;
 use App\Rental;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -50,10 +50,12 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
       //
+      //$review = new Customer($request);
       $review=$request->all();
       $customer_id = Auth::user()->id;
+      //dd($customer_id);
       //dd($review);
-
+      dd($review);
       $review->reviews()->attach($customer_id);
       //$review->customer_id=$customer_id;
       dd($review);
