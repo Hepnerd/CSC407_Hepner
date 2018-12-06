@@ -19,11 +19,10 @@ class ReviewController extends Controller
     public function index()
     {
         //
-        //$customer_id = Auth::user()->id;
-
-        $review = Review::get()->where('id', $id)->toArray();
-
-        return view('Review/reviewIndex')->with('review', $review);
+        $customer_id = Auth::user()->id;
+        $movie = Movie::get()->toArray();
+        $review = Review::get()->where('customer_id', $customer_id)->toArray();
+        return view('Review/reviewIndex')->with('review', $review)->with('movies', $movie);
     }
 
     /**
@@ -55,7 +54,7 @@ class ReviewController extends Controller
       $customer_id = Auth::user()->id;
       //dd($customer_id);
       //dd($review);
-      dd($review);
+      //dd($review);
       $review->reviews()->attach($customer_id);
       //$review->customer_id=$customer_id;
       dd($review);

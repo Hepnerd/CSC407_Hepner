@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 style="text-align:center; text-decoration: underline">All Current Reviews List</h1>
+    <h1 style="text-align:center; text-decoration: underline">Your Current Reviews</h1>
 
     <table class="disk_table" align="center">
         <thead>
