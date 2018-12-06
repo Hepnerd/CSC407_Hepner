@@ -82,8 +82,8 @@ class ReviewController extends Controller
         ['movie_id' => $data['movie_id'] , 'customer_id' => $customer_id],
         ['review' => $data['review'], 'rating' => $data['rating']]
       );
-      return redirect()->route('movie.index');
-    }
+        return view('Review/reviewIndex');
+      }
 
     /**
      * Display the specified resource.
