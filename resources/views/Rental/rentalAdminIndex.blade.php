@@ -15,23 +15,30 @@
         </tr>
         </thead>
         <tbody>
-
         @foreach($rentals as $rental)
-
-            <tr>
-                <td style="text-align:center; padding-left: 45px;">{{$rental->title}}</td>
-                <td style="text-align:center; padding-right: 45px;">{{$rental->type }}</td>
-                <td style="text-align:center; padding-right: 45px;">{{$rental->customer }}</td>
-                <td style="text-align:center; padding-right: 45px;">{{$rental->rent_date }}</td>
-                <td style="text-align:center; padding-right: 45px;">{{$rental->return_date }}</td>
-                <td style="text-align:center; padding-right: 45px;">{{$rental->location }}</td>
-
-                @if($rental->return_date == null)
-                    <td><a href="{{route('rental.edit', $rental->rental_id)}}" id="rentalReturnButton" name="rentalReturnButton" class="btn btn-primary">Return</a></td>
-                @else
-                    <td></td>
-                @endif
-            </tr>
+            @foreach($rental['customers'] as $customer)
+                <tr>
+                    <td style="text-align:center; padding-left: 45px;">{{$rental['movie']['title']}}</td>
+                    <td style="text-align:center; padding-right: 45px;">{{$rental['Type']}}</td>
+                    <td style="text-align:center; padding-right: 45px;">{{$customer['name']}}</td>
+                    <td style="text-align:center; padding-right: 45px;">{{$customer['pivot']['Rent_Date']}}</td>
+                    <td style="text-align:center; padding-right: 45px;">{{$customer['pivot']['Return_Date']}}</td>
+                    @if($customer['pivot']['Returned_To'] == null)
+                        <td style="text-align:center; padding-right: 45px;"></td>
+                    @else
+                        @foreach($kiosks as $kiosk)
+                            @if($kiosk['id'] == $customer['pivot']['Returned_To'])
+                                <td style="text-align:center; padding-right: 45px;">{{$kiosk['location']}}</td>
+    @endif
+    @endforeach
+    @endif
+                    @if($customer['pivot']['Return_Date'] == null)
+                        <td><a href="{{route('rental.edit', $customer['pivot']['id'])}}" id="rentalReturnButton" name="rentalReturnButton" class="btn btn-primary">Return</a></td>
+                    @else
+                        <td></td>
+                    @endif
+                </tr>
+    @endforeach
         @endforeach
         </tbody>
     </table>
