@@ -19,4 +19,10 @@ class Movie extends Model
         return $this->belongsToMany('App\Kiosk', 'disks')
             ->withPivot(['Type', 'id']);
     }
+
+    public function reviews()
+    {
+        return $this->belongsToMany('App\Movie', 'reviews')
+            ->withPivot('comment');
+    }
 }
