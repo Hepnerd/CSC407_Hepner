@@ -31,7 +31,6 @@ class RentalController extends Controller
             ->toArray();
 
         return view('rental/rentalIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
-
     }
 
     /**

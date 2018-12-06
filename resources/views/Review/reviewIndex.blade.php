@@ -13,13 +13,13 @@
         </thead>
         <tbody>
 
-        @foreach($review as $review)
+        @foreach($reviews as $review)
                 <tr>
-                    @foreach($movies as $movie)
-                    @if($review['movie_id'] == $movie['id'])
-                    <td style="text-align:center; padding-left: 45px; padding-right: 45px;">{{$movie['title']}}</td>
-                    @endif
-                    @endforeach
+                  @foreach($movies as $movie)
+                      @if ($movie['id'] == $review['movie_id'])
+                          <td style="text-align:center; padding-left: 45px;">{{$movie['title']}}</td>
+                      @endif
+                  @endforeach
 
                     <td style="text-align:center; padding-right: 45px;">{{$review['review']}}</td>
                     <td style="text-align:center; padding-right: 45px;">{{$review['rating']}}/10</td>

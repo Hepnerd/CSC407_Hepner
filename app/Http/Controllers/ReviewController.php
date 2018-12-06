@@ -21,8 +21,19 @@ class ReviewController extends Controller
         //
         $customer_id = Auth::user()->id;
         $movie = Movie::get()->toArray();
+
+        if($this->isAuthorized()){
+
+        $review = Review::get()->toArray();
+
+        }
+        else
+{
         $review = Review::get()->where('customer_id', $customer_id)->toArray();
-        return view('Review/reviewIndex')->with('review', $review)->with('movies', $movie);
+
+        }
+
+        return view('Review/reviewIndex')->with('reviews', $review)->with('movies', $movie);
     }
 
     /**
@@ -71,8 +82,8 @@ class ReviewController extends Controller
         ['movie_id' => $data['movie_id'] , 'customer_id' => $customer_id],
         ['review' => $data['review'], 'rating' => $data['rating']]
       );
-      return redirect()->route('movie.index');
-    }
+        return view('Review/reviewIndex');
+      }
 
     /**
      * Display the specified resource.
@@ -135,5 +146,16 @@ class ReviewController extends Controller
     public function destroy(Review $review)
     {
         //
+    }
+    public function isAuthorized()
+    {
+        //
+        if(Auth::user()->email == 'brettwebb63@gmail.com'){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth'], function () {
     /**
      * Routes for reviews
      */
-        Route::get('/review/admin', 'ReviewController@adminIndex');
+        Route::get('/review/index', 'ReviewController@index');
         Route::get('/review/create/{id}', 'ReviewController@create');
         Route::resource('/review', 'ReviewController')->except(['create']);;
 
@@ -53,4 +53,3 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/customer', 'CustomerController');
 
 Auth::routes();
-
