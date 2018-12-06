@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Kiosk;
 use App\Disk;
 use App\Customer;
 use App\Movie;
 use App\Rental;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,14 +23,55 @@ class RentalController extends Controller
     {
         //
         $kiosks = Kiosk::get()->toArray();
-        $rentals = Disk::has('customers')
-            ->with('customers')
-            ->with('movie')
-            ->with('kiosk')
-            ->get()
-            ->toArray();
 
-        return view('rental/rentalIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
+        if($this->isAuthorized()){
+            $rentals = DB::select('select
+                            m.title as `title`,
+                            d.Type as `type`,
+                            c.`name` as `customer`,
+                            c.`id` as `customer_id`,
+                            r.id as `rental_id`,
+                            r.Rent_Date as `rent_date`,
+                            r.Return_Date as `return_date`,
+                            r.Returned_To as `return_location`,
+                            k.location as `location`
+                        from
+                            rentals r
+                            inner join customers c on (r.customer_id = c.id)
+                            inner join movies m on (r.Movie_ID = m.id)
+                            inner join disks d on (r.disk_id = d.id)
+                            inner join kiosks k on (d.Kiosk_ID = k.id)
+                        order by
+                            r.Return_Date');
+
+            return view('rental/rentalAdminIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
+        }
+        else{
+            $customerid = Auth::user()->id;
+            $rentals = DB::select("select
+                            m.title as `title`,
+                            d.Type as `type`,
+                            c.`name` as `customer`,
+                            c.`id` as `customer_id`,
+                            r.id as `rental_id`,
+                            r.Rent_Date as `rent_date`,
+                            r.Return_Date as `return_date`,
+                            r.Returned_To as `return_location`,
+                            k.location as `location`
+                        from
+                            rentals r
+                            inner join customers c on (r.customer_id = c.id)
+                            inner join movies m on (r.Movie_ID = m.id)
+                            inner join disks d on (r.disk_id = d.id)
+                            inner join kiosks k on (d.Kiosk_ID = k.id)
+                        WHERE
+                            c.id = " . $customerid . "
+                        order by
+                            r.Return_Date");
+
+
+            return view('rental/rentalIndex')->with('rentals', $rentals)->with('kiosks', $kiosks);
+        }
     }
 
     /**

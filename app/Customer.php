@@ -24,8 +24,9 @@ class Customer extends Authenticatable
     }
 
 
-    public function reviews()
+    public function customers()
     {
-      return $this->belongsToMany('App\Customer', 'reviews')->withPivot(['customer_id']);
+      return $this->belongsToMany('App\Customer', 'reviews')
+                  ->withPivot(['id']);
     }
 }

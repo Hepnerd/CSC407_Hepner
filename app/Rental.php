@@ -10,4 +10,6 @@ class Rental extends Model
     protected $fillable = [
         'Movie_ID', 'Disk_ID', 'Customer_ID', 'Rent_Date', 'Return_Date',
     ];
+
+
 }
