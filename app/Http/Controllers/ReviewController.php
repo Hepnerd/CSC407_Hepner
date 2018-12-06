@@ -49,7 +49,7 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
       //
-      //$review = new Customer($request);
+      /*$review = new Customer($request);
       $review=$request->all();
       $customer_id = Auth::user()->id;
       //dd($customer_id);
@@ -63,7 +63,14 @@ class ReviewController extends Controller
 
       //$review = new Review($review);
       $review->save();
+      */
+      $data = $request->all();
+      $customer_id = Auth::user()->id;
 
+      Review::updateOrCreate(
+        ['movie_id' => $data['movie_id'] , 'customer_id' => $customer_id],
+        ['review' => $data['review'], 'rating' => $data['rating']]
+      );
       return redirect()->route('movie.index');
     }
 
