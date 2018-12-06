@@ -69,9 +69,6 @@ class ReviewController extends Controller
       $review->reviews()->attach($customer_id);
       //$review->customer_id=$customer_id;
       dd($review);
-
-
-
       //$review = new Review($review);
       $review->save();
       */
@@ -83,7 +80,7 @@ class ReviewController extends Controller
         ['review' => $data['review'], 'rating' => $data['rating']]
       );
         return view('Review/reviewIndex');
-      }
+    }
 
     /**
      * Display the specified resource.

@@ -58,21 +58,25 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/rental">
-                      <!--                 onclick="event.preventDefault(); -->
-                                        Rental Index
+                                    <a class="dropdown-item" href="/movie/manage">
+                                        <!--                 onclick="event.preventDefault(); -->
+                                        Manage Movies
                                     </a>
                                     <a class="dropdown-item" href="/kiosk">
-                      <!--                 onclick="event.preventDefault(); -->
+                                        <!--                 onclick="event.preventDefault(); -->
                                         Kiosk Index
                                     </a>
                                     <a class="dropdown-item" href="/disk">
-                      <!--                 onclick="event.preventDefault(); -->
+                                        <!--                 onclick="event.preventDefault(); -->
                                         Disk Index
                                     </a>
                                     <a class="dropdown-item" href="/customer">
                       <!--                 onclick="event.preventDefault(); -->
                                         Customer Index
+                                    </a>
+                                    <a class="dropdown-item" href="/rental/admin">
+                                        <!--                 onclick="event.preventDefault(); -->
+                                        Rental Index
                                     </a>
                                     <a class="dropdown-item" href="/review">
                       <!--                 onclick="event.preventDefault(); -->

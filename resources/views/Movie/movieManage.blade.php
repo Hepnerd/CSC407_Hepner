@@ -9,7 +9,7 @@
         <tr>
             <th>Movie's Title</th>
             <th>Description</th>
-            <th>Genre ID</th>
+            <th>Genre Type</th>
         </tr>
         </thead>
         <tbody>
