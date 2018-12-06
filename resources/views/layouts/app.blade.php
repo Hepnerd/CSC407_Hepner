@@ -74,6 +74,10 @@
                       <!--                 onclick="event.preventDefault(); -->
                                         Customer Index
                                     </a>
+                                    <a class="dropdown-item" href="/review">
+                      <!--                 onclick="event.preventDefault(); -->
+                                        Review Index
+                                    </a>
                                     @endif
                                     @if (Auth::user()->email != 'brettwebb63@gmail.com')
 
@@ -87,7 +91,7 @@
                       <!--                 onclick="event.preventDefault(); -->
                                         Rentals
                                     </a>
-                                    <a class="dropdown-item" href="/rental">
+                                    <a class="dropdown-item" href="/review">
                       <!--                 onclick="event.preventDefault(); -->
                                         Reviews
                                     </a>
